@@ -4,8 +4,8 @@
   "description": "Awesome project developed with TypeORM.",
   "scripts": {
     "tsc": "tsc",
-    "dev": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules --inspect=0.0.0.0:9267 ./src/apps/mmc/index.ts",
-    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/apps/mmc/index.ts",
+    "dev": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules --inspect=0.0.0.0:9267 ./src/apps/mmc/app.ts",
+    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/apps/mmc/app.ts",
     "prod": "tsc && node ./build/app.js",
     "migration:run": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run",
     "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -n"
@@ -45,6 +45,7 @@
     "@types/helmet": "0.0.44",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/node": "~13.1.1",
+    "@types/socket.io": "^2.1.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bson": "^4.0.2",

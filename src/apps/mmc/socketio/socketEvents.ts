@@ -1,10 +1,10 @@
-export default io => {
-  // Currently lets just keep records of user id & their socket id
-  let userSockets = {};
+import { ChatConstants } from "./constants";
 
-  // Set socket.io listeners.
-  io.on("connection", socket => {
-    socket.on("disconnect", () => {
+export default io => {
+  let userSockets;
+
+  io.on(ChatConstants.CONNECT, socket => {
+    socket.on(ChatConstants.DISCONNECT, () => {
       const userId = userSockets[socket.id];
       delete userSockets[socket.id];
 
