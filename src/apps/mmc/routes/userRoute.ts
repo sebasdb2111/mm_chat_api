@@ -1,9 +1,9 @@
 import { Router } from "express";
-import UserController from "../controllers/UserController";
+import UserController from "../controllers/user/UserController";
 import { checkJwt } from "../../../contexts/shared/middlewares/checkJwt";
 import { checkRole } from "../../../contexts/shared/middlewares/checkRole";
 import container from "../config/dependency-injection";
-import { UserCreateController } from "../controllers/UserCreateController";
+import { UserCreateController } from "../controllers/user/UserCreateController";
 
 const router = Router();
 
@@ -18,7 +18,7 @@ router.get(
 );
 
 const userCreateController: UserCreateController = container.get(
-  "Apps.mmc.controllers.UserCreateController"
+  "Apps.mmc.controllers.user.UserCreateController"
 );
 router.post("/", userCreateController.run.bind(userCreateController));
 

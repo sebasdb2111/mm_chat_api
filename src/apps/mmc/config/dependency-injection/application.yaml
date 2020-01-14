@@ -11,8 +11,8 @@ services:
     class: ../../../../contexts/mmc/users/application/UserCreate
     arguments: ["@Mmc.users.UserRepository"]
 
-  Apps.mmc.controllers.UserCreateController:
-    class: ../../controllers/UserCreateController
+  Apps.mmc.controllers.user.UserCreateController:
+    class: ../../controllers/user/UserCreateController
     arguments: ["@Mmc.users.UserCreate"]
 
 #  Apps.mmc.controllers.AuthLoginController:

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import AuthLogin from "../../../contexts/mmc/auth/application/AuthLogin";
+import AuthLogin from "../../../../contexts/mmc/auth/application/AuthLogin";
 import * as httpStatus from "http-status";
-import Controller from "./Controller";
-import UserAlreadyExists from "../../../contexts/mmc/users/domain/UserAlreadyExists";
+import Controller from "../Controller";
+import UserAlreadyExists from "../../../../contexts/mmc/users/domain/UserAlreadyExists";
 
 export class AuthLoginController implements Controller {
   constructor(private authLogin: AuthLogin) {}

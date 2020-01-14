@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import UserCreate from "../../../contexts/mmc/users/application/UserCreate";
+import UserCreate from "../../../../contexts/mmc/users/application/UserCreate";
 import * as httpStatus from "http-status";
-import Controller from "./Controller";
-import UserDto from "../../../contexts/mmc/users/domain/UserDto";
-import UserAlreadyExists from "../../../contexts/mmc/users/domain/UserAlreadyExists";
+import Controller from "../Controller";
+import UserDto from "../../../../contexts/mmc/users/domain/UserDto";
+import UserAlreadyExists from "../../../../contexts/mmc/users/domain/UserAlreadyExists";
 
 export class UserCreateController implements Controller {
   constructor(private userCreate: UserCreate) {}

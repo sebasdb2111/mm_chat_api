@@ -1,7 +1,7 @@
 // import container from '../config/dependency-injection';
 import { Router } from "express";
 import { checkJwt } from "../../../contexts/shared/middlewares/checkJwt";
-import AuthController from "../controllers/AuthController";
+import AuthController from "../controllers/auth/AuthController";
 // import {AuthLoginController} from '../controllers/AuthLoginController';
 
 const router = Router();
