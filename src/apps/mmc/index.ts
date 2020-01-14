@@ -6,6 +6,8 @@ import * as helmet from "helmet";
 import * as cors from "cors";
 import routes from "./routes/index";
 import * as errorHandler from "errorhandler";
+import io from "socket.io";
+import socketEvents from "./socketEvents";
 
 const app: express.Express = express();
 
@@ -25,6 +27,7 @@ createConnection()
 
     app.set("port", 3000);
     app.listen(app.get("port"), () => {
+      socketEvents(io);
       console.log(
         `  App is running at http://localhost:${app.get("port")} in ${app.get(
           "env"
