@@ -35,10 +35,12 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  // TODO: refactorizar a classes en shared
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
+  // TODO: refactorizar a classes en shared
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return bcrypt.compareSync(unencryptedPassword, this.password);
   }

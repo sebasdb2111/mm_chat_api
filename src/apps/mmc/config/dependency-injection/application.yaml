@@ -1,0 +1,20 @@
+services:
+  Mmc.shared.Logger:
+    class: ../../../../contexts/shared/infrastructure/WinstonLogger
+    arguments: []
+
+  Mmc.users.UserRepository:
+    class: ../../../../contexts/mmc/users/infrastructure/TypeormUserRepository
+    arguments: []
+
+  Mmc.users.UserCreate:
+    class: ../../../../contexts/mmc/users/application/UserCreate
+    arguments: ["@Mmc.users.UserRepository"]
+
+  Apps.mmc.controllers.UserCreateController:
+    class: ../../controllers/UserCreateController
+    arguments: ["@Mmc.users.UserCreate"]
+
+#  Apps.mmc.controllers.AuthLoginController:
+#    class: ../../controllers/AuthLoginController
+#    arguments: ["@Mmc.auth.AuthLogin"]

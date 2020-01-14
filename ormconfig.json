@@ -5,20 +5,21 @@
    "username": "root",
    "password": "",
    "database": "mm_chat",
-   "synchronize": true,
+   "synchronize": false,
    "logging": false,
+   "migrationsTableName": "mm_chat_migrations",
    "entities": [
-      "src/entity/**/*.ts"
+      "src/contexts/mmc/**/domain/entity/*.ts"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "migrations/*.ts"
    ],
    "subscribers": [
-      "src/subscriber/**/*.ts"
+      "subscribers/*.ts"
    ],
    "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
+      "entitiesDir": "src/contexts/mmc/**/domain/entity",
+      "migrationsDir": "migrations",
+      "subscribersDir": "subscribers"
    }
 }
