@@ -1,13 +1,10 @@
-// import container from '../config/dependency-injection';
-import { Router } from "express";
-import { checkJwt } from "../../../contexts/shared/middlewares/checkJwt";
-import AuthController from "../controllers/auth/AuthController";
-// import {AuthLoginController} from '../controllers/AuthLoginController';
+import container             from '../config/dependency-injection';
+import {Router}              from 'express';
+import {AuthLoginController} from '../controllers/auth/AuthLoginController';
 
 const router = Router();
-// const authLoginController: AuthLoginController = container.get('apps.mmc.controllers.AuthLoginController');
-// router.post('/login', authLoginController.run);
 
-router.post("/change-password", [checkJwt], AuthController.changePassword);
+const authLoginController: AuthLoginController = container.get('Apps.mmc.controllers.auth.AuthLoginController');
+router.post('/login', authLoginController.run.bind(authLoginController));
 
 export default router;
