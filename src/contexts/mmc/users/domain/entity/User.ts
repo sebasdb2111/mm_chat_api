@@ -1,47 +1,54 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Unique,
-  CreateDateColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { Length, IsNotEmpty } from "class-validator";
-import * as bcrypt from "bcryptjs";
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    Unique,
+    CreateDateColumn,
+    UpdateDateColumn
+}                                  from 'typeorm';
+import {Length, IsNotEmpty}        from 'class-validator';
+import * as bcrypt                 from 'bcryptjs';
+import PasswordIsNotValidException from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 
 @Entity()
-@Unique(["username"])
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+@Unique(['username'])
+export class User
+{
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  @Length(4, 20)
-  username: string;
+    @Column()
+    @Length(4, 20)
+    username: string;
 
-  @Column()
-  @Length(4, 100)
-  password: string;
+    @Column()
+    @Length(4, 100)
+    password: string;
 
-  @Column()
-  @IsNotEmpty()
-  role: string;
+    @Column()
+    @IsNotEmpty()
+    role: string;
 
-  @Column()
-  @CreateDateColumn()
-  createdAt: Date;
+    @Column()
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @Column()
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-  // TODO: refactorizar a classes en shared
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
+    hashPassword(): any
+    {
+        this.password = bcrypt.hashSync(this.password, 8);
+    }
 
-  // TODO: refactorizar a classes en shared
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
-    return bcrypt.compareSync(unencryptedPassword, this.password);
-  }
+    checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean
+    {
+        const isValid: boolean = bcrypt.compareSync(unencryptedPassword, this.password);
+        if (isValid) {
+            return true;
+        } else {
+            throw new PasswordIsNotValidException();
+        }
+    }
 }
