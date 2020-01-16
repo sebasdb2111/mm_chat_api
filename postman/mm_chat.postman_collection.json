@@ -11,6 +11,16 @@
 				{
 					"name": "User Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -79,6 +89,16 @@
 				{
 					"name": "User Get",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -107,6 +127,16 @@
 				{
 					"name": "User Deactivate",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -146,6 +176,16 @@
 				{
 					"name": "User Edit",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -214,7 +254,7 @@
 								},
 								{
 									"key": "password",
-									"value": "ainhoa",
+									"value": "ainhoa_ainhoa",
 									"type": "text"
 								}
 							]
@@ -238,6 +278,16 @@
 				{
 					"name": "Auth Change Password",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -245,6 +295,12 @@
 								"name": "Content-Type",
 								"type": "text",
 								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTc2MjI3LCJleHAiOjE1NzkxNzk4Mjd9.QjAly5iUjg0HIloE0Z5jGHGuNj9IRvc748FUKLtdRPE",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -257,7 +313,7 @@
 								},
 								{
 									"key": "password",
-									"value": "ainhoa",
+									"value": "ainhoa_ainhoa",
 									"type": "text"
 								}
 							]

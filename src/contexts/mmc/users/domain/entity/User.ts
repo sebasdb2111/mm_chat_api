@@ -71,10 +71,10 @@ export class User
     checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean
     {
         const isValid: boolean = bcrypt.compareSync(unencryptedPassword, this.password);
-        if (isValid) {
-            return true;
-        } else {
-            throw new PasswordIsNotValidException();
+        if (!isValid) {
+            throw new PasswordIsNotValidException(this.username);
         }
+
+        return true;
     }
 }

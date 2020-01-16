@@ -4,7 +4,7 @@ import {UserGetController}        from '../controllers/user/UserGetController';
 import {UserCreateController}     from '../controllers/user/UserCreateController';
 import {UserEditController}       from '../controllers/user/UserEditController';
 import {UserDeactivateController} from '../controllers/user/UserDeactivateController';
-// import {checkJwt}                 from '../../../contexts/shared/middlewares/checkJwt';
+import {checkAuthentication}                 from "../../../contexts/shared/middlewares/checkAuthentication";
 
 const router                                             = Router();
 const userCreateController: UserCreateController         = container.get('Apps.mmc.controllers.user.UserCreateController');
@@ -21,16 +21,19 @@ router
 router
     .get(
         '/:id',
+        checkAuthentication,
         userGetController.run.bind(userGetController)
     )
     .patch(
         '/:id',
+        checkAuthentication,
         userEditController.run.bind(userEditController)
     );
 
 router
     .patch(
         '/:id/deactivate',
+        checkAuthentication,
         userDeactivateController.run.bind(userDeactivateController)
     );
 
