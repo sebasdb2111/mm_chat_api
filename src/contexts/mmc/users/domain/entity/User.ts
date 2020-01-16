@@ -1,47 +1,80 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Unique,
-  CreateDateColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { Length, IsNotEmpty } from "class-validator";
-import * as bcrypt from "bcryptjs";
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    Unique,
+    CreateDateColumn,
+    UpdateDateColumn
+}                                                       from 'typeorm';
+import {Length, IsNotEmpty, IsEmail, IsEnum, IsBoolean} from 'class-validator';
+import * as bcrypt                                      from 'bcryptjs';
+import PasswordIsNotValidException                      from '../../../auth/domain/exceptions/PasswordIsNotValidException';
+import {UserRoleEnum}                                   from '../UserRoleEnum';
 
 @Entity()
-@Unique(["username"])
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+@Unique(['username', 'email'])
+export class User
+{
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  @Length(4, 20)
-  username: string;
+    @Column()
+    @Length(4, 20)
+    @IsNotEmpty()
+    username: string;
 
-  @Column()
-  @Length(4, 100)
-  password: string;
+    @Column()
+    @Length(4, 100)
+    @IsNotEmpty()
+    password: string;
 
-  @Column()
-  @IsNotEmpty()
-  role: string;
+    @Column()
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
 
-  @Column()
-  @CreateDateColumn()
-  createdAt: Date;
+    @Column()
+    @IsEnum(UserRoleEnum)
+    role: string;
 
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @Column()
+    @Length(2, 100)
+    @IsNotEmpty()
+    firstName: string;
 
-  // TODO: refactorizar a classes en shared
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
+    @Column()
+    @Length(2, 100)
+    @IsNotEmpty()
+    lastName: string;
 
-  // TODO: refactorizar a classes en shared
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
-    return bcrypt.compareSync(unencryptedPassword, this.password);
-  }
+    @Column()
+    @CreateDateColumn()
+    lastLogin: Date;
+
+    @Column()
+    @IsBoolean()
+    isActive: boolean;
+
+    @Column()
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @Column()
+    @UpdateDateColumn()
+    updatedAt: Date;
+
+    hashPassword(): any
+    {
+        this.password = bcrypt.hashSync(this.password, 8);
+    }
+
+    checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean
+    {
+        const isValid: boolean = bcrypt.compareSync(unencryptedPassword, this.password);
+        if (!isValid) {
+            throw new PasswordIsNotValidException(this.username);
+        }
+
+        return true;
+    }
 }

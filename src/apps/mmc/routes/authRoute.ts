@@ -1,13 +1,22 @@
-// import container from '../config/dependency-injection';
-import { Router } from "express";
-import { checkJwt } from "../../../contexts/shared/middlewares/checkJwt";
-import AuthController from "../controllers/auth/AuthController";
-// import {AuthLoginController} from '../controllers/AuthLoginController';
+import {Router}                       from 'express';
+import container                      from '../config/dependency-injection';
+import {AuthLoginController}          from '../controllers/auth/AuthLoginController';
+import {AuthChangePasswordController} from '../controllers/auth/AuthChangePasswordController';
+import {checkAuthentication}                     from "../../../contexts/shared/middlewares/checkAuthentication";
 
 const router = Router();
-// const authLoginController: AuthLoginController = container.get('apps.mmc.controllers.AuthLoginController');
-// router.post('/login', authLoginController.run);
 
-router.post("/change-password", [checkJwt], AuthController.changePassword);
+const authLoginController: AuthLoginController = container.get('Apps.mmc.controllers.auth.AuthLoginController');
+router.post(
+    '/login',
+    authLoginController.run.bind(authLoginController)
+);
+
+const authChangePasswordController: AuthChangePasswordController = container.get('Apps.mmc.controllers.auth.AuthChangePasswordController');
+router.patch(
+    '/change-password',
+    checkAuthentication,
+    authChangePasswordController.run.bind(authChangePasswordController)
+);
 
 export default router;

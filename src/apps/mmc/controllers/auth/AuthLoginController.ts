@@ -1,27 +1,34 @@
-import { Request, Response } from "express";
-import AuthLogin from "../../../../contexts/mmc/auth/application/AuthLogin";
-import * as httpStatus from "http-status";
-import Controller from "../Controller";
-import UserAlreadyExists from "../../../../contexts/mmc/users/domain/UserAlreadyExists";
+import {Request, Response}         from 'express';
+import AuthLogin                   from '../../../../contexts/mmc/auth/application/AuthLogin';
+import * as httpStatus             from 'http-status';
+import Controller                  from '../Controller';
+import AuthLoginDto                from '../../../../contexts/mmc/auth/domain/dto/AuthLoginDto';
+import PasswordIsNotValidException from '../../../../contexts/mmc/auth/domain/exceptions/PasswordIsNotValidException';
 
-export class AuthLoginController implements Controller {
-  constructor(private authLogin: AuthLogin) {}
 
-  async run(req: Request, res: Response) {
-    const username: string = req.params.id;
-    const password: string = req.body.name;
-
-    try {
-      await this.authLogin.run(username, password);
-      // TODO: meter un return
-    } catch (e) {
-      if (e instanceof UserAlreadyExists) {
-        res.status(httpStatus.BAD_REQUEST).send(e.message);
-      } else {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e);
-      }
+export class AuthLoginController implements Controller
+{
+    constructor(private authLogin: AuthLogin)
+    {
     }
 
-    res.status(httpStatus.ACCEPTED).send();
-  }
+    async run(req: Request, res: Response)
+    {
+        const authLoginDto: AuthLoginDto = new AuthLoginDto(
+            req.body.username,
+            req.body.password,
+        );
+
+        try {
+            const token = await this.authLogin.run(authLoginDto);
+            res.status(httpStatus.ACCEPTED).send(token);
+        }
+        catch (e) {
+            if (e instanceof PasswordIsNotValidException) {
+                res.status(httpStatus.UNAUTHORIZED).send(e.message);
+            } else {
+                res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e);
+            }
+        }
+    }
 }

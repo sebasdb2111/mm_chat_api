@@ -1,39 +1,40 @@
-import { Router } from "express";
-import UserController from "../controllers/user/UserController";
-import { checkJwt } from "../../../contexts/shared/middlewares/checkJwt";
-import { checkRole } from "../../../contexts/shared/middlewares/checkRole";
-import container from "../config/dependency-injection";
-import { UserCreateController } from "../controllers/user/UserCreateController";
+import {Router}                   from 'express';
+import container                  from '../config/dependency-injection';
+import {UserGetController}        from '../controllers/user/UserGetController';
+import {UserCreateController}     from '../controllers/user/UserCreateController';
+import {UserEditController}       from '../controllers/user/UserEditController';
+import {UserDeactivateController} from '../controllers/user/UserDeactivateController';
+import {checkAuthentication}                 from "../../../contexts/shared/middlewares/checkAuthentication";
 
-const router = Router();
+const router                                             = Router();
+const userCreateController: UserCreateController         = container.get('Apps.mmc.controllers.user.UserCreateController');
+const userGetController: UserGetController               = container.get('Apps.mmc.controllers.user.UserGetController');
+const userEditController: UserEditController             = container.get('Apps.mmc.controllers.user.UserEditController');
+const userDeactivateController: UserDeactivateController = container.get('Apps.mmc.controllers.user.UserDeactivateController');
 
-//Get all users
-router.get("/", [checkJwt, checkRole(["ADMIN"])], UserController.listAll);
+router
+    .post(
+        '/',
+        userCreateController.run.bind(userCreateController)
+    );
 
-// Get one users
-router.get(
-  "/:id([0-9]+)",
-  [checkJwt, checkRole(["ADMIN"])],
-  UserController.getOneById
-);
+router
+    .get(
+        '/:id',
+        checkAuthentication,
+        userGetController.run.bind(userGetController)
+    )
+    .patch(
+        '/:id',
+        checkAuthentication,
+        userEditController.run.bind(userEditController)
+    );
 
-const userCreateController: UserCreateController = container.get(
-  "Apps.mmc.controllers.user.UserCreateController"
-);
-router.post("/", userCreateController.run.bind(userCreateController));
-
-//Edit one users
-router.patch(
-  "/:id([0-9]+)",
-  [checkJwt, checkRole(["ADMIN"])],
-  UserController.editUser
-);
-
-//Delete one users
-router.delete(
-  "/:id([0-9]+)",
-  [checkJwt, checkRole(["ADMIN"])],
-  UserController.deleteUser
-);
+router
+    .patch(
+        '/:id/deactivate',
+        checkAuthentication,
+        userDeactivateController.run.bind(userDeactivateController)
+    );
 
 export default router;
