@@ -8,8 +8,8 @@ import {checkAuthentication}                 from "../../../contexts/shared/midd
 
 const router                                             = Router();
 const userCreateController: UserCreateController         = container.get('Apps.mmc.controllers.user.UserCreateController');
-const userGetController: UserGetController               = container.get('Apps.mmc.controllers.user.UserGetController');
-const userEditController: UserEditController             = container.get('Apps.mmc.controllers.user.UserEditController');
+const userGetController: UserGetController               = container.get('Apps.mmc.controllers.user.CustomerGetController');
+const userEditController: UserEditController             = container.get('Apps.mmc.controllers.user.CustomerEditController');
 const userDeactivateController: UserDeactivateController = container.get('Apps.mmc.controllers.user.UserDeactivateController');
 
 router
