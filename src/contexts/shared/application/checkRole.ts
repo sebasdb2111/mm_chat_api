@@ -1,9 +1,9 @@
 import {Request, Response, NextFunction} from 'express';
 import {getRepository}                   from 'typeorm';
+import * as httpStatus                   from 'http-status';
+import {User}                            from '../../mmc/users/domain/entity/User';
 
-import {User} from '../../mmc/users/domain/entity/User';
-
-export const checkRole = (roles: Array<string>) =>
+export const checkRole = (roles: string[]) =>
 {
     return async (req: Request, res: Response, next: NextFunction) =>
     {
@@ -16,13 +16,13 @@ export const checkRole = (roles: Array<string>) =>
             user = await userRepository.findOneOrFail(id);
         }
         catch (id) {
-            res.status(401).send();
+            res.status(httpStatus.UNAUTHORIZED).send();
         }
 
         if (roles.indexOf(user.role) > -1) {
             next();
         } else {
-            res.status(401).send();
+            res.status(httpStatus.UNAUTHORIZED).send();
         }
     };
 };

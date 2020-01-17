@@ -6,16 +6,64 @@ services:
     class: ../../../../contexts/shared/infrastructure/WinstonLogger
     arguments: []
 
-  ##############################
+  ##########################################################################################
+  ########## AUTH
+  ##########################################################################################
+
+  #*************
+  # User Login
+  #*************
+  Mmc.auth.AuthUserLogin:
+    class: ../../../../contexts/mmc/auth/application/user/AuthUserLogin
+    arguments: ['@Mmc.users.UserRepository']
+
+  Apps.mmc.controllers.auth.AuthUserLoginController:
+    class: ../../controllers/auth/user/AuthUserLoginController
+    arguments: ['@Mmc.auth.AuthUserLogin']
+
+  #***********************
+  # User Change Password
+  #***********************
+  Mmc.auth.AuthUserChangePassword:
+    class: ../../../../contexts/mmc/auth/application/user/AuthUserChangePassword
+    arguments: ['@Mmc.customers.CustomerRepository']
+
+  Apps.mmc.controllers.auth.AuthUserChangePasswordController:
+    class: ../../controllers/auth/user/AuthUserChangePasswordController
+    arguments: ['@Mmc.auth.AuthUserChangePassword']
+
+  #*****************
+  # Customer Login
+  #*****************
+  Mmc.auth.AuthCustomerLogin:
+    class: ../../../../contexts/mmc/auth/application/customer/AuthCustomerLogin
+    arguments: ['@Mmc.customers.CustomerRepository']
+
+  Apps.mmc.controllers.auth.AuthCustomerLoginController:
+    class: ../../controllers/auth/customer/AuthCustomerLoginController
+    arguments: ['@Mmc.auth.AuthCustomerLogin']
+
+  #****************************
+  # Customer Change Password
+  #****************************
+  Mmc.auth.AuthCustomerChangePassword:
+    class: ../../../../contexts/mmc/auth/application/customer/AuthCustomerChangePassword
+    arguments: ['@Mmc.customers.CustomerRepository']
+
+  Apps.mmc.controllers.auth.AuthCustomerChangePasswordController:
+    class: ../../controllers/auth/customer/AuthCustomerChangePasswordController
+    arguments: ['@Mmc.auth.AuthCustomerChangePassword']
+
+  ##########################################################################################
   ########## USERS
-  ##############################
+  ##########################################################################################
   Mmc.users.UserRepository:
     class: ../../../../contexts/mmc/users/infrastructure/TypeormUserRepository
     arguments: []
 
-  #***********
+  #*************
   # Create
-  #***********
+  #*************
   Mmc.users.UserCreate:
     class: ../../../../contexts/mmc/users/application/UserCreate
     arguments: ['@Mmc.users.UserRepository']
@@ -24,9 +72,9 @@ services:
     class: ../../controllers/user/UserCreateController
     arguments: ['@Mmc.users.UserCreate']
 
-  #***********
+  #*************
   # Get
-  #***********
+  #*************
   Mmc.users.UserGet:
       class: ../../../../contexts/mmc/users/application/UserGet
       arguments: ['@Mmc.users.UserRepository']
@@ -35,9 +83,9 @@ services:
     class: ../../controllers/user/UserGetController
     arguments: ['@Mmc.users.UserGet']
 
-  #***********
+  #*************
   # Edit
-  #***********
+  #*************
   Mmc.users.UserEdit:
       class: ../../../../contexts/mmc/users/application/UserEdit
       arguments: ['@Mmc.users.UserRepository']
@@ -46,9 +94,9 @@ services:
     class: ../../controllers/user/UserEditController
     arguments: ['@Mmc.users.UserEdit']
 
-  #***********
+  #*************
   # Deactivate
-  #***********
+  #*************
   Mmc.users.UserDeactivate:
       class: ../../../../contexts/mmc/users/application/UserDeactivate
       arguments: ['@Mmc.users.UserRepository']
@@ -57,28 +105,53 @@ services:
     class: ../../controllers/user/UserDeactivateController
     arguments: ['@Mmc.users.UserDeactivate']
 
-  ##############################
-  ########## AUTH
-  ##############################
+  ##########################################################################################
+  ########## CUSTOMERS
+  ##########################################################################################
+  Mmc.customers.CustomerRepository:
+    class: ../../../../contexts/mmc/customers/infrastructure/TypeormCustomerRepository
+    arguments: []
 
-  #***********
-  # Login
-  #***********
-  Mmc.auth.AuthLogin:
-    class: ../../../../contexts/mmc/auth/application/AuthLogin
-    arguments: ['@Mmc.users.UserRepository']
+  #*************
+  # Create
+  #*************
+  Mmc.customers.CustomerCreate:
+    class: ../../../../contexts/mmc/customers/application/CustomerCreate
+    arguments: ['@Mmc.customers.CustomerRepository']
 
-  Apps.mmc.controllers.auth.AuthLoginController:
-    class: ../../controllers/auth/AuthLoginController
-    arguments: ['@Mmc.auth.AuthLogin']
+  Apps.mmc.controllers.customer.CustomerCreateController:
+    class: ../../controllers/customer/CustomerCreateController
+    arguments: ['@Mmc.customers.CustomerCreate']
 
-  #***********
-  # Change Password
-  #***********
-  Mmc.auth.AuthChangePassword:
-    class: ../../../../contexts/mmc/auth/application/AuthChangePassword
-    arguments: ['@Mmc.users.UserRepository']
+  #*************
+  # Get
+  #*************
+  Mmc.customers.CustomerGet:
+      class: ../../../../contexts/mmc/customers/application/CustomerGet
+      arguments: ['@Mmc.customers.CustomerRepository']
 
-  Apps.mmc.controllers.auth.AuthChangePasswordController:
-    class: ../../controllers/auth/AuthChangePasswordController
-    arguments: ['@Mmc.auth.AuthChangePassword']
+  Apps.mmc.controllers.customer.CustomerGetController:
+    class: ../../controllers/customer/CustomerGetController
+    arguments: ['@Mmc.customers.CustomerGet']
+
+  #*************
+  # Edit
+  #*************
+  Mmc.customers.CustomerEdit:
+      class: ../../../../contexts/mmc/customers/application/CustomerEdit
+      arguments: ['@Mmc.customers.CustomerRepository']
+
+  Apps.mmc.controllers.customer.CustomerEditController:
+    class: ../../controllers/customer/CustomerEditController
+    arguments: ['@Mmc.customers.CustomerEdit']
+
+  #*************
+  # Deactivate
+  #*************
+  Mmc.customers.CustomerDeactivate:
+      class: ../../../../contexts/mmc/customers/application/CustomerDeactivate
+      arguments: ['@Mmc.customers.CustomerRepository']
+
+  Apps.mmc.controllers.customer.CustomerDeactivateController:
+    class: ../../controllers/customer/CustomerDeactivateController
+    arguments: ['@Mmc.customers.CustomerDeactivate']

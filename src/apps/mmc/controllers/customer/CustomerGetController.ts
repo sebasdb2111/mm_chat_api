@@ -1,13 +1,12 @@
 import {Request, Response}        from 'express';
 import * as httpStatus            from 'http-status';
 import Controller                 from '../Controller';
-import UserGet                    from '../../../../contexts/mmc/users/application/UserGet';
-import UserNotExistsException     from '../../../../contexts/mmc/shared/domain/exceptions/UserNotExistsException';
+import CustomerGet                from '../../../../contexts/mmc/customers/application/CustomerGet';
+import CustomerNotExistsException from '../../../../contexts/mmc/shared/domain/exceptions/CustomerNotExistsException';
 
-
-export class UserGetController implements Controller
+export class CustomerGetController implements Controller
 {
-    constructor(private userGet: UserGet)
+    constructor(private customerGet: CustomerGet)
     {
     }
 
@@ -18,13 +17,14 @@ export class UserGetController implements Controller
             const id: number = Number(req.params.id);
 
             try {
-                const user = await this.userGet.run(id);
-                resolve(res.status(httpStatus.CREATED).send(user));
+                const customer = await this.customerGet.run(id);
+
+                resolve(res.status(httpStatus.OK).send(customer));
             }
             catch (error) {
                 let httpStatusError = httpStatus.INTERNAL_SERVER_ERROR;
 
-                if (error instanceof UserNotExistsException) {
+                if (error instanceof CustomerNotExistsException) {
                     httpStatusError = httpStatus.BAD_REQUEST;
                 }
 

@@ -9,11 +9,10 @@ import {
 import {Length, IsNotEmpty, IsEmail, IsEnum, IsBoolean} from 'class-validator';
 import * as bcrypt                                      from 'bcryptjs';
 import PasswordIsNotValidException                      from '../../../auth/domain/exceptions/PasswordIsNotValidException';
-import {UserRoleEnum}                                   from '../../../../shared/domain/UserRoleEnum';
 
 @Entity()
 @Unique(['username', 'email'])
-export class User
+export class Customer
 {
     @PrimaryGeneratedColumn()
     id: number;
@@ -32,10 +31,6 @@ export class User
     @IsEmail()
     @IsNotEmpty()
     email: string;
-
-    @Column()
-    @IsEnum(UserRoleEnum)
-    role: string;
 
     @Column()
     @Length(2, 100)
