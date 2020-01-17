@@ -1,7 +1,6 @@
 import {User}         from '../domain/entity/User';
 import UserRepository from '../domain/UserRepository';
 import UserCreateDto  from '../domain/dto/UserCreateDto';
-import {Customer}     from "../../customers/domain/entity/Customer";
 
 export default class UserCreate
 {

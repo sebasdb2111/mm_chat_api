@@ -35,12 +35,12 @@
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "sebas_diez",
+									"value": "ADMIN",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "sebas_diez",
+									"value": "ADMIN",
 									"type": "text"
 								},
 								{
@@ -50,17 +50,17 @@
 								},
 								{
 									"key": "email",
-									"value": "sebas_diez@sebas_diez.com",
+									"value": "admin@admin.com",
 									"type": "text"
 								},
 								{
 									"key": "firstName",
-									"value": "Sebastian",
+									"value": "Admin",
 									"type": "text"
 								},
 								{
 									"key": "lastName",
-									"value": "Diez",
+									"value": "Admin",
 									"type": "text"
 								},
 								{
@@ -71,7 +71,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/",
+							"raw": "http://localhost:3000/api/user/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -79,7 +79,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"users",
+								"user",
 								""
 							]
 						}
@@ -109,7 +109,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/users/1",
+							"raw": "http://localhost:3000/api/user/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -117,7 +117,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"users",
+								"user",
 								"1"
 							]
 						}
@@ -157,7 +157,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/1/deactivate",
+							"raw": "http://localhost:3000/api/user/1/deactivate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -165,7 +165,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"users",
+								"user",
 								"1",
 								"deactivate"
 							]
@@ -200,18 +200,18 @@
 							"urlencoded": [
 								{
 									"key": "firstName",
-									"value": "Ainhoa",
+									"value": "Administrator",
 									"type": "text"
 								},
 								{
 									"key": "lastName",
-									"value": "Rodriguez",
+									"value": "Administrator",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/1",
+							"raw": "http://localhost:3000/api/user/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -219,7 +219,7 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"users",
+								"user",
 								"1"
 							]
 						}
@@ -233,8 +233,357 @@
 			"name": "auth",
 			"item": [
 				{
-					"name": "Auth Login",
+					"name": "user",
+					"item": [
+						{
+							"name": "Auth User Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "ADMIN",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ADMIN",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Auth User Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "auth",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTc2MjI3LCJleHAiOjE1NzkxNzk4Mjd9.QjAly5iUjg0HIloE0Z5jGHGuNj9IRvc748FUKLtdRPE",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "ADMIN",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ADMIN_ADMIN",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/user/change-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"user",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "customer",
+					"item": [
+						{
+							"name": "Auth Customer Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "sebas",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "sebas",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/customer/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"customer",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Auth Customer Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "auth",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTc2MjI3LCJleHAiOjE1NzkxNzk4Mjd9.QjAly5iUjg0HIloE0Z5jGHGuNj9IRvc748FUKLtdRPE",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "sebas",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "sebas_sebas",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/customer/change-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"customer",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "psychics",
+					"item": [
+						{
+							"name": "Auth Psychic Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "jose",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "jose",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/psychic/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"psychic",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Auth Psychic Change Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									},
+									{
+										"key": "auth",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTc2MjI3LCJleHAiOjE1NzkxNzk4Mjd9.QjAly5iUjg0HIloE0Z5jGHGuNj9IRvc748FUKLtdRPE",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "jose",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "jose_jose",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/psychic/change-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"psychic",
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "Customer Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -249,18 +598,38 @@
 							"urlencoded": [
 								{
 									"key": "username",
-									"value": "ainhoa",
+									"value": "israel",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "ainhoa_ainhoa",
+									"value": "israel",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "israel@israel.com",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Israel",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Isra",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "true",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/login",
+							"raw": "http://localhost:3000/api/customer/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -268,15 +637,53 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"auth",
-								"login"
+								"customer",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Auth Change Password",
+					"name": "Customer Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/customer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Deactivate",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -295,31 +702,20 @@
 								"name": "Content-Type",
 								"type": "text",
 								"value": "application/x-www-form-urlencoded"
-							},
-							{
-								"key": "auth",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTc2MjI3LCJleHAiOjE1NzkxNzk4Mjd9.QjAly5iUjg0HIloE0Z5jGHGuNj9IRvc748FUKLtdRPE",
-								"type": "text",
-								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "ainhoa",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "ainhoa_ainhoa",
+									"key": "isActive",
+									"value": "true",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/change-password",
+							"raw": "http://localhost:3000/api/customer/1/deactivate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -327,8 +723,281 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"auth",
-								"change-password"
+								"customer",
+								"1",
+								"deactivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Isra",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Isra",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/customer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "psychics",
+			"item": [
+				{
+					"name": "Psychic Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "jose",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "jose",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jose@jose.com",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Jose",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Jose",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/psychic/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"psychic",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Psychic Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoic2ViYXNfZGlleiIsImlhdCI6MTU3OTI1NTQwMCwiZXhwIjoxNTc5MjU5MDAwfQ.gqUHer3ymj3pRQXUgT1wQF9x2sSM3-bdqZGzgxe6NtU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/psychic/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"psychic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Psychic Deactivate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwc3ljaGljSWQiOjEsInVzZXJuYW1lIjoiam9zZSIsImlhdCI6MTU3OTI3NTMyMSwiZXhwIjoxNTc5Mjc4OTIxfQ.LJpex5drFOmcvBgEMKB5pbDzhI0OL0IDi3AqrHivOJE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "isActive",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/psychic/1/deactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"psychic",
+								"1",
+								"deactivate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Psychic Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWluaG9hIiwiaWF0IjoxNTc5MTgxMTE5LCJleHAiOjE1NzkxODQ3MTl9.YF7KQ8KN0sFTsfiYYGceCqrq-hzwme6ER601kS9PR2o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Josete",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Josete",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/psychic/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"psychic",
+								"1"
 							]
 						}
 					},

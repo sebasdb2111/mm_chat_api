@@ -12,7 +12,7 @@ import PasswordIsNotValidException                      from '../../../auth/doma
 
 @Entity()
 @Unique(['username', 'email'])
-export class Customer
+export class Psychic
 {
     @PrimaryGeneratedColumn()
     id: number;
