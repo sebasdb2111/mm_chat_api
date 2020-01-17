@@ -1,29 +1,35 @@
-import {Request, Response}    from 'express';
-import * as httpStatus        from 'http-status';
-import Controller             from '../Controller';
+import {Request, Response}        from 'express';
+import * as httpStatus            from 'http-status';
+import Controller                 from '../Controller';
 import CustomerGet                from '../../../../contexts/mmc/customers/application/CustomerGet';
 import CustomerNotExistsException from '../../../../contexts/mmc/shared/domain/exceptions/CustomerNotExistsException';
 
 export class CustomerGetController implements Controller
 {
-    constructor(private userGet: CustomerGet)
+    constructor(private customerGet: CustomerGet)
     {
     }
 
     async run(req: Request, res: Response)
     {
-        const id: number = Number(req.params.id);
+        return new Promise(async (resolve, reject) =>
+        {
+            const id: number = Number(req.params.id);
 
-        try {
-            const user = await this.userGet.run(id);
-            res.status(httpStatus.CREATED).send(user);
-        }
-        catch (error) {
-            if (error instanceof CustomerNotExistsException) {
-                res.status(httpStatus.BAD_REQUEST).send(error.message);
-            } else {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+            try {
+                const customer = await this.customerGet.run(id);
+
+                resolve(res.status(httpStatus.OK).send(customer));
             }
-        }
+            catch (error) {
+                let httpStatusError = httpStatus.INTERNAL_SERVER_ERROR;
+
+                if (error instanceof CustomerNotExistsException) {
+                    httpStatusError = httpStatus.BAD_REQUEST;
+                }
+
+                reject(res.status(httpStatusError).send(error.message));
+            }
+        });
     }
 }

@@ -19,6 +19,8 @@ export default class UserCreate
 
         await new UserNotExistGuard(userDeactivateDto.id, user);
 
-        return this.repository.updateIsActivate(userDeactivateDto.id, user);
+        const userDeactivated = await this.repository.updateIsActive(userDeactivateDto.id, user);
+
+        return Promise.resolve(userDeactivated);
     }
 }

@@ -1,6 +1,7 @@
 import {User}         from '../domain/entity/User';
 import UserRepository from '../domain/UserRepository';
 import UserCreateDto  from '../domain/dto/UserCreateDto';
+import {Customer}     from "../../customers/domain/entity/Customer";
 
 export default class UserCreate
 {
@@ -24,6 +25,8 @@ export default class UserCreate
 
         user.hashPassword();
 
-        return this.repository.save(user);
+        const newUser: User = await this.repository.save(user);
+
+        return Promise.resolve(newUser);
     }
 }

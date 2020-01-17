@@ -10,7 +10,9 @@ export default interface UserRepository
 
     update(user: User): Promise<User>;
 
-    updateIsActivate(id: number, user: User): Promise<void>;
+    updateIsActive(id: number, user: User): Promise<void>;
 
     updatePassword(id: number, user: User): Promise<void>;
+
+    updateLastLogin(id: number, user: User): Promise<void>;
 }

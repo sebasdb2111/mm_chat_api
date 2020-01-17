@@ -1,12 +1,12 @@
-import {Router}                   from 'express';
-import container                  from '../config/dependency-injection';
+import {Router}                       from 'express';
+import container                      from '../config/dependency-injection';
+import {checkAuthentication}          from '../../../contexts/shared/application/checkAuthentication';
 import {CustomerGetController}        from '../controllers/customer/CustomerGetController';
 import {CustomerCreateController}     from '../controllers/customer/CustomerCreateController';
 import {CustomerEditController}       from '../controllers/customer/CustomerEditController';
 import {CustomerDeactivateController} from '../controllers/customer/CustomerDeactivateController';
-import {checkAuthentication}                 from "../../../contexts/shared/middlewares/checkAuthentication";
 
-const router                                             = Router();
+const router                                                     = Router();
 const customerCreateController: CustomerCreateController         = container.get('Apps.mmc.controllers.customer.CustomerCreateController');
 const customerGetController: CustomerGetController               = container.get('Apps.mmc.controllers.customer.CustomerGetController');
 const customerEditController: CustomerEditController             = container.get('Apps.mmc.controllers.customer.CustomerEditController');

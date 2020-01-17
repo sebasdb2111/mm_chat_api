@@ -1,14 +1,14 @@
 import {Request, Response}         from 'express';
-import AuthLogin                   from '../../../../contexts/mmc/auth/application/AuthLogin';
 import * as httpStatus             from 'http-status';
-import Controller                  from '../Controller';
-import AuthLoginDto                from '../../../../contexts/mmc/auth/domain/dto/AuthLoginDto';
-import PasswordIsNotValidException from '../../../../contexts/mmc/auth/domain/exceptions/PasswordIsNotValidException';
+import Controller                  from '../../Controller';
+import AuthCustomerLogin           from '../../../../../contexts/mmc/auth/application/customer/AuthCustomerLogin';
+import AuthLoginDto                from '../../../../../contexts/mmc/auth/domain/dto/AuthLoginDto';
+import PasswordIsNotValidException from '../../../../../contexts/mmc/auth/domain/exceptions/PasswordIsNotValidException';
 
 
-export class AuthLoginController implements Controller
+export class AuthCustomerLoginController implements Controller
 {
-    constructor(private authLogin: AuthLogin)
+    constructor(private authCustomerLogin: AuthCustomerLogin)
     {
     }
 
@@ -20,7 +20,7 @@ export class AuthLoginController implements Controller
         );
 
         try {
-            const token = await this.authLogin.run(authLoginDto);
+            const token = await this.authCustomerLogin.run(authLoginDto);
             res.status(httpStatus.ACCEPTED).send(token);
         }
         catch (e) {

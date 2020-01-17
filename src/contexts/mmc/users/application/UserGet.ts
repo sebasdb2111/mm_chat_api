@@ -17,6 +17,6 @@ export default class UserCreate
 
         await new UserNotExistGuard(userId, user);
 
-        return user;
+        return Promise.resolve(user);
     }
 }
