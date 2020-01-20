@@ -18,6 +18,8 @@ export default class AuthPsychicChangePassword
 
         psychic.hashPassword();
 
-        await this.repository.updatePassword(psychic.id, psychic);
+        const passwordChanged: void = await this.repository.updatePassword(psychic.id, psychic);
+
+        return Promise.resolve(passwordChanged);
     }
 }

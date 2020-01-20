@@ -18,6 +18,8 @@ export default class AuthUserChangePassword
 
         user.hashPassword();
 
-        await this.repository.updatePassword(user.id, user);
+        const passwordChanged: void = await this.repository.updatePassword(user.id, user);
+
+        return Promise.resolve(passwordChanged);
     }
 }

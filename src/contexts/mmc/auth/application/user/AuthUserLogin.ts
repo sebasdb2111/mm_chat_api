@@ -23,13 +23,19 @@ export default class AuthUserLogin
         // user.lastLogin = ;
         await this.repository.updateLastLogin(user.id, user);
 
-        return this.createJwt(user);
+        const psychicToken: string = await this.createJwt(user);
+
+        return Promise.resolve(psychicToken);
     }
 
     async createJwt(user: User): Promise<string>
     {
         return jwt.sign(
-            {userId: user.id, username: user.username},
+            {
+                userId    : user.id,
+                username  : user.username,
+                entityType: 'USER'
+            },
             config.jwtSecret,
             {expiresIn: '1h'}
         );

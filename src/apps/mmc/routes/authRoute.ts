@@ -1,13 +1,13 @@
 import {Router}                               from 'express';
 import container                              from '../config/dependency-injection';
-import {checkAuthentication}                  from '../../../contexts/shared/application/checkAuthentication';
-import {checkRole}                            from '../../../contexts/shared/application/checkRole';
+import {CheckAuthentication}                  from '../../../contexts/shared/application/CheckAuthentication';
+import {CheckRole}                            from '../../../contexts/shared/application/CheckRole';
 import {AuthUserLoginController}              from '../controllers/auth/user/AuthUserLoginController';
 import {AuthUserChangePasswordController}     from '../controllers/auth/user/AuthUserChangePasswordController';
 import {AuthCustomerLoginController}          from '../controllers/auth/customer/AuthCustomerLoginController';
 import {AuthCustomerChangePasswordController} from '../controllers/auth/customer/AuthCustomerChangePasswordController';
-import {AuthPsychicLoginController}          from '../controllers/auth/psychic/AuthPsychicLoginController';
-import {AuthPsychicChangePasswordController} from '../controllers/auth/psychic/AuthPsychicChangePasswordController';
+import {AuthPsychicLoginController}           from '../controllers/auth/psychic/AuthPsychicLoginController';
+import {AuthPsychicChangePasswordController}  from '../controllers/auth/psychic/AuthPsychicChangePasswordController';
 import {UserRoleEnum}                         from '../../../contexts/shared/domain/UserRoleEnum';
 
 const router = Router();
@@ -21,8 +21,8 @@ router.post(
 const authUserChangePasswordController: AuthUserChangePasswordController = container.get('Apps.mmc.controllers.auth.AuthUserChangePasswordController');
 router.patch(
     '/user/change-password',
-    checkAuthentication,
-    checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+    CheckAuthentication,
+    CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
     authUserChangePasswordController.run.bind(authUserChangePasswordController)
 );
 
@@ -35,7 +35,7 @@ router.post(
 const authCustomerChangePasswordController: AuthCustomerChangePasswordController = container.get('Apps.mmc.controllers.auth.AuthCustomerChangePasswordController');
 router.patch(
     '/customer/change-password',
-    checkAuthentication,
+    CheckAuthentication,
     authCustomerChangePasswordController.run.bind(authCustomerChangePasswordController)
 );
 
@@ -48,7 +48,7 @@ router.post(
 const authPsychicChangePasswordController: AuthPsychicChangePasswordController = container.get('Apps.mmc.controllers.auth.AuthPsychicChangePasswordController');
 router.patch(
     '/psychic/change-password',
-    checkAuthentication,
+    CheckAuthentication,
     authPsychicChangePasswordController.run.bind(authPsychicChangePasswordController)
 );
 

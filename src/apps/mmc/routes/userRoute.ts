@@ -1,7 +1,7 @@
 import {Router}                   from 'express';
 import container                  from '../config/dependency-injection';
-import {checkAuthentication}      from '../../../contexts/shared/application/checkAuthentication';
-import {checkRole}                from '../../../contexts/shared/application/checkRole';
+import {CheckAuthentication}      from '../../../contexts/shared/application/CheckAuthentication';
+import {CheckRole}                from '../../../contexts/shared/application/CheckRole';
 import {UserGetController}        from '../controllers/user/UserGetController';
 import {UserCreateController}     from '../controllers/user/UserCreateController';
 import {UserEditController}       from '../controllers/user/UserEditController';
@@ -17,29 +17,29 @@ const userDeactivateController: UserDeactivateController = container.get('Apps.m
 router
     .post(
         '/',
-        checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+        CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
         userCreateController.run.bind(userCreateController)
     );
 
 router
     .get(
         '/:id',
-        checkAuthentication,
-        checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+        CheckAuthentication,
+        CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
         userGetController.run.bind(userGetController)
     )
     .patch(
         '/:id',
-        checkAuthentication,
-        checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+        CheckAuthentication,
+        CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
         userEditController.run.bind(userEditController)
     );
 
 router
     .patch(
         '/:id/deactivate',
-        checkAuthentication,
-        checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+        CheckAuthentication,
+        CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
         userDeactivateController.run.bind(userDeactivateController)
     );
 

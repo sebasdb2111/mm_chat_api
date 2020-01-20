@@ -1,6 +1,6 @@
 import {Router}                       from 'express';
 import container                      from '../config/dependency-injection';
-import {checkAuthentication}          from '../../../contexts/shared/application/checkAuthentication';
+import {CheckAuthentication}          from '../../../contexts/shared/application/CheckAuthentication';
 import {CustomerGetController}        from '../controllers/customer/CustomerGetController';
 import {CustomerCreateController}     from '../controllers/customer/CustomerCreateController';
 import {CustomerEditController}       from '../controllers/customer/CustomerEditController';
@@ -21,19 +21,19 @@ router
 router
     .get(
         '/:id',
-        checkAuthentication,
+        CheckAuthentication,
         customerGetController.run.bind(customerGetController)
     )
     .patch(
         '/:id',
-        checkAuthentication,
+        CheckAuthentication,
         customerEditController.run.bind(customerEditController)
     );
 
 router
     .patch(
         '/:id/deactivate',
-        checkAuthentication,
+        CheckAuthentication,
         customerDeactivateController.run.bind(customerDeactivateController)
     );
 

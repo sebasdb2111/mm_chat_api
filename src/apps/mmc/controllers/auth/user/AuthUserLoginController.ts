@@ -14,21 +14,24 @@ export class AuthUserLoginController implements Controller
 
     async run(req: Request, res: Response)
     {
-        const authLoginDto: AuthLoginDto = new AuthLoginDto(
-            req.body.username,
-            req.body.password,
-        );
+        return new Promise(async (resolve, reject) =>
+        {
+            const authLoginDto: AuthLoginDto = new AuthLoginDto(
+                req.body.username,
+                req.body.password,
+            );
 
-        try {
-            const token = await this.authUserLogin.run(authLoginDto);
-            res.status(httpStatus.ACCEPTED).send(token);
-        }
-        catch (e) {
-            if (e instanceof PasswordIsNotValidException) {
-                res.status(httpStatus.UNAUTHORIZED).send(e.message);
-            } else {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e);
+            try {
+                const token = await this.authUserLogin.run(authLoginDto);
+                resolve(res.status(httpStatus.ACCEPTED).send(token));
             }
-        }
+            catch (e) {
+                if (e instanceof PasswordIsNotValidException) {
+                    reject(res.status(httpStatus.UNAUTHORIZED).send(e.message));
+                } else {
+                    reject(res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e));
+                }
+            }
+        });
     }
 }
