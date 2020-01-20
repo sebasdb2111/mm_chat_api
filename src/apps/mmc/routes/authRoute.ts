@@ -6,8 +6,8 @@ import {AuthUserLoginController}              from '../controllers/auth/user/Aut
 import {AuthUserChangePasswordController}     from '../controllers/auth/user/AuthUserChangePasswordController';
 import {AuthCustomerLoginController}          from '../controllers/auth/customer/AuthCustomerLoginController';
 import {AuthCustomerChangePasswordController} from '../controllers/auth/customer/AuthCustomerChangePasswordController';
-import {AuthPsychicLoginController}          from '../controllers/auth/psychic/AuthPsychicLoginController';
-import {AuthPsychicChangePasswordController} from '../controllers/auth/psychic/AuthPsychicChangePasswordController';
+import {AuthPsychicLoginController}           from '../controllers/auth/psychic/AuthPsychicLoginController';
+import {AuthPsychicChangePasswordController}  from '../controllers/auth/psychic/AuthPsychicChangePasswordController';
 import {UserRoleEnum}                         from '../../../contexts/shared/domain/UserRoleEnum';
 
 const router = Router();

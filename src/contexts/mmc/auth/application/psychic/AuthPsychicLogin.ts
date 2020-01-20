@@ -23,7 +23,9 @@ export default class AuthPsychicLogin
         // user.lastLogin = ;
         await this.repository.updateLastLogin(psychic.id, psychic);
 
-        return this.createJwt(psychic);
+        const psychicToken: string = await this.createJwt(psychic);
+
+        return Promise.resolve(psychicToken);
     }
 
     async createJwt(psychic: Psychic): Promise<string>

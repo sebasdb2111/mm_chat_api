@@ -13,18 +13,20 @@ export class AuthPsychicChangePasswordController implements Controller
 
     async run(req: Request, res: Response)
     {
-        const authPsychicChangePasswordDto: AuthChangePasswordDto = new AuthChangePasswordDto(
-            req.body.username,
-            req.body.password,
-        );
+        return new Promise(async (resolve, reject) =>
+        {
+            const authPsychicChangePasswordDto: AuthChangePasswordDto = new AuthChangePasswordDto(
+                req.body.username,
+                req.body.password,
+            );
 
-        try {
-            await this.authPsychicChangePassword.run(authPsychicChangePasswordDto);
-            res.status(httpStatus.OK).send(`Password for the psychic ${req.body.username} has been changed successfully`);
-        }
-        catch (e) {
-            res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e);
-
-        }
+            try {
+                await this.authPsychicChangePassword.run(authPsychicChangePasswordDto);
+                resolve(res.status(httpStatus.OK).send(`Password for the psychic ${req.body.username} has been changed successfully`));
+            }
+            catch (e) {
+                reject(res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e));
+            }
+        });
     }
 }

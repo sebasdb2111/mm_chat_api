@@ -23,7 +23,9 @@ export default class AuthCustomerLogin
         // user.lastLogin = ;
         await this.repository.updateLastLogin(customer.id, customer);
 
-        return this.createJwt(customer);
+        const customerToken: string = await this.createJwt(customer);
+
+        return Promise.resolve(customerToken);
     }
 
     async createJwt(customer: Customer): Promise<string>
