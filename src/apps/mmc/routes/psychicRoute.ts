@@ -1,6 +1,6 @@
 import {Router}                      from 'express';
 import container                     from '../config/dependency-injection';
-import {checkAuthentication}         from '../../../contexts/shared/application/checkAuthentication';
+import {CheckAuthentication}         from '../../../contexts/shared/application/CheckAuthentication';
 import {PsychicGetController}        from '../controllers/psychic/PsychicGetController';
 import {PsychicCreateController}     from '../controllers/psychic/PsychicCreateController';
 import {PsychicEditController}       from '../controllers/psychic/PsychicEditController';
@@ -21,19 +21,19 @@ router
 router
     .get(
         '/:id',
-        checkAuthentication,
+        CheckAuthentication,
         psychicGetController.run.bind(psychicGetController)
     )
     .patch(
         '/:id',
-        checkAuthentication,
+        CheckAuthentication,
         psychicEditController.run.bind(psychicEditController)
     );
 
 router
     .patch(
         '/:id/deactivate',
-        checkAuthentication,
+        CheckAuthentication,
         psychicDeactivateController.run.bind(psychicDeactivateController)
     );
 

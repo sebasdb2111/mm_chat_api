@@ -3,7 +3,7 @@ import {getRepository}                   from 'typeorm';
 import * as httpStatus                   from 'http-status';
 import {User}                            from '../../mmc/users/domain/entity/User';
 
-export const checkRole = (roles: string[]) =>
+export const CheckRole = (roles: string[]) =>
 {
     return async (req: Request, res: Response, next: NextFunction) =>
     {

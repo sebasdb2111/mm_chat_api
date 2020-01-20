@@ -31,7 +31,11 @@ export default class AuthUserLogin
     async createJwt(user: User): Promise<string>
     {
         return jwt.sign(
-            {userId: user.id, username: user.username},
+            {
+                userId    : user.id,
+                username  : user.username,
+                entityType: 'USER'
+            },
             config.jwtSecret,
             {expiresIn: '1h'}
         );
