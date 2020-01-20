@@ -6,6 +6,8 @@ import {AuthUserLoginController}              from '../controllers/auth/user/Aut
 import {AuthUserChangePasswordController}     from '../controllers/auth/user/AuthUserChangePasswordController';
 import {AuthCustomerLoginController}          from '../controllers/auth/customer/AuthCustomerLoginController';
 import {AuthCustomerChangePasswordController} from '../controllers/auth/customer/AuthCustomerChangePasswordController';
+import {AuthPsychicLoginController}          from '../controllers/auth/psychic/AuthPsychicLoginController';
+import {AuthPsychicChangePasswordController} from '../controllers/auth/psychic/AuthPsychicChangePasswordController';
 import {UserRoleEnum}                         from '../../../contexts/shared/domain/UserRoleEnum';
 
 const router = Router();
@@ -34,8 +36,20 @@ const authCustomerChangePasswordController: AuthCustomerChangePasswordController
 router.patch(
     '/customer/change-password',
     checkAuthentication,
-    checkRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
     authCustomerChangePasswordController.run.bind(authCustomerChangePasswordController)
+);
+
+const authPsychicLoginController: AuthPsychicLoginController = container.get('Apps.mmc.controllers.auth.AuthPsychicLoginController');
+router.post(
+    '/psychic/login',
+    authPsychicLoginController.run.bind(authPsychicLoginController)
+);
+
+const authPsychicChangePasswordController: AuthPsychicChangePasswordController = container.get('Apps.mmc.controllers.auth.AuthPsychicChangePasswordController');
+router.patch(
+    '/psychic/change-password',
+    checkAuthentication,
+    authPsychicChangePasswordController.run.bind(authPsychicChangePasswordController)
 );
 
 export default router;

@@ -54,6 +54,28 @@ services:
     class: ../../controllers/auth/customer/AuthCustomerChangePasswordController
     arguments: ['@Mmc.auth.AuthCustomerChangePassword']
 
+  #*****************
+  # Psychic Login
+  #*****************
+  Mmc.auth.AuthPsychicLogin:
+    class: ../../../../contexts/mmc/auth/application/psychic/AuthPsychicLogin
+    arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.auth.AuthPsychicLoginController:
+    class: ../../controllers/auth/psychic/AuthPsychicLoginController
+    arguments: ['@Mmc.auth.AuthPsychicLogin']
+
+  #****************************
+  # Psychic Change Password
+  #****************************
+  Mmc.auth.AuthPsychicChangePassword:
+    class: ../../../../contexts/mmc/auth/application/psychic/AuthPsychicChangePassword
+    arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.auth.AuthPsychicChangePasswordController:
+    class: ../../controllers/auth/psychic/AuthPsychicChangePasswordController
+    arguments: ['@Mmc.auth.AuthPsychicChangePassword']
+
   ##########################################################################################
   ########## USERS
   ##########################################################################################
@@ -155,3 +177,54 @@ services:
   Apps.mmc.controllers.customer.CustomerDeactivateController:
     class: ../../controllers/customer/CustomerDeactivateController
     arguments: ['@Mmc.customers.CustomerDeactivate']
+
+  ##########################################################################################
+  ########## PSYCHICS
+  ##########################################################################################
+  Mmc.psychics.PsychicRepository:
+    class: ../../../../contexts/mmc/psychics/infrastructure/TypeormPsychicRepository
+    arguments: []
+
+  #*************
+  # Create
+  #*************
+  Mmc.psychics.PsychicCreate:
+    class: ../../../../contexts/mmc/psychics/application/PsychicCreate
+    arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.psychic.PsychicCreateController:
+    class: ../../controllers/psychic/PsychicCreateController
+    arguments: ['@Mmc.psychics.PsychicCreate']
+
+  #*************
+  # Get
+  #*************
+  Mmc.psychics.PsychicGet:
+      class: ../../../../contexts/mmc/psychics/application/PsychicGet
+      arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.psychic.PsychicGetController:
+    class: ../../controllers/psychic/PsychicGetController
+    arguments: ['@Mmc.psychics.PsychicGet']
+
+  #*************
+  # Edit
+  #*************
+  Mmc.psychics.PsychicEdit:
+      class: ../../../../contexts/mmc/psychics/application/PsychicEdit
+      arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.psychic.PsychicEditController:
+    class: ../../controllers/psychic/PsychicEditController
+    arguments: ['@Mmc.psychics.PsychicEdit']
+
+  #*************
+  # Deactivate
+  #*************
+  Mmc.psychics.PsychicDeactivate:
+      class: ../../../../contexts/mmc/psychics/application/PsychicDeactivate
+      arguments: ['@Mmc.psychics.PsychicRepository']
+
+  Apps.mmc.controllers.psychic.PsychicDeactivateController:
+    class: ../../controllers/psychic/PsychicDeactivateController
+    arguments: ['@Mmc.psychics.PsychicDeactivate']
