@@ -5,7 +5,6 @@ export default class PsychicCreateDto
     public email: string;
     public firstName: string;
     public lastName: string;
-    public isActive: boolean;
 
     constructor(
         username: string,
@@ -13,7 +12,6 @@ export default class PsychicCreateDto
         email: string,
         firstName: string,
         lastName: string,
-        isActive: boolean,
     )
     {
         this.username  = username;
@@ -21,6 +19,5 @@ export default class PsychicCreateDto
         this.email     = email;
         this.firstName = firstName;
         this.lastName  = lastName;
-        this.isActive  = isActive;
     }
 }

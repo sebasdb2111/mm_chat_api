@@ -20,7 +20,7 @@ export default class UserCreate
         user.email       = userDto.email;
         user.firstName   = userDto.firstName;
         user.lastName    = userDto.lastName;
-        user.isActive    = userDto.isActive;
+        user.isActive    = true;
 
         user.hashPassword();
 

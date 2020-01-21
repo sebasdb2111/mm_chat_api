@@ -2,7 +2,7 @@ import {User}            from '../domain/entity/User';
 import UserRepository    from '../domain/UserRepository';
 import UserNotExistGuard from "../../shared/application/UserNotExistGuard";
 
-export default class UserCreate
+export default class UserGet
 {
     private repository: UserRepository;
 
@@ -13,10 +13,15 @@ export default class UserCreate
 
     async run(userId: number): Promise<User>
     {
-        const user: User = await this.repository.findOneOrFail(userId);
+        try {
+            const user: User = await this.repository.findOneOrFail(userId);
 
-        await new UserNotExistGuard(userId, user);
+            await new UserNotExistGuard(userId, user);
 
-        return Promise.resolve(user);
+            return Promise.resolve(user);
+        }
+        catch (error) {
+            return Promise.reject(error)
+        }
     }
 }

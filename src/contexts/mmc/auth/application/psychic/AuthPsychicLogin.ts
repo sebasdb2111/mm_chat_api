@@ -1,8 +1,9 @@
-import * as jwt          from 'jsonwebtoken';
-import config            from '../../../../../apps/mmc/config/config';
-import PsychicRepository from '../../../psychics/domain/PsychicRepository';
-import {Psychic}         from '../../../psychics/domain/entity/Psychic';
-import AuthLoginDto      from '../../domain/dto/AuthLoginDto';
+import * as jwt           from 'jsonwebtoken';
+import config             from '../../../../../apps/mmc/config/config';
+import PsychicRepository  from '../../../psychics/domain/PsychicRepository';
+import {Psychic}          from '../../../psychics/domain/entity/Psychic';
+import AuthLoginDto       from '../../domain/dto/AuthLoginDto';
+import {AuthEntitiesEnum} from '../../../../shared/domain/AuthEntitiesEnum';
 
 export default class AuthPsychicLogin
 {
@@ -34,7 +35,7 @@ export default class AuthPsychicLogin
             {
                 psychicId : psychic.id,
                 username  : psychic.username,
-                entityType: 'PSYCHIC'
+                entityType: AuthEntitiesEnum.PSYCHIC
             },
             config.jwtSecret,
             {expiresIn: '1h'}

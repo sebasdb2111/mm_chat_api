@@ -4,15 +4,17 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn
+    UpdateDateColumn, OneToMany
 }                                                       from 'typeorm';
 import {Length, IsNotEmpty, IsEmail, IsEnum, IsBoolean} from 'class-validator';
 import * as bcrypt                                      from 'bcryptjs';
 import PasswordIsNotValidException                      from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 import {UserRoleEnum}                                   from '../../../../shared/domain/UserRoleEnum';
+import {ChatSession}                                    from '../../../chatSessions/domain/entity/ChatSession';
+import {ChatSessionMessage}                             from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
 
 @Entity()
-@Unique(['username', 'email'])
+@Unique(['id', 'username', 'email'])
 export class User
 {
     @PrimaryGeneratedColumn()
@@ -62,6 +64,12 @@ export class User
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(type => ChatSession, chatSession => chatSession.user)
+    chatSessions: ChatSession[];
+
+    @OneToMany(type => ChatSessionMessage, messages => messages.user)
+    chatSessionMessages: ChatSessionMessage[];
 
     hashPassword(): any
     {

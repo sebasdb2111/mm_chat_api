@@ -1,8 +1,9 @@
-import * as jwt       from 'jsonwebtoken';
-import UserRepository from '../../../users/domain/UserRepository';
-import {User}         from '../../../users/domain/entity/User';
-import config         from '../../../../../apps/mmc/config/config';
-import AuthLoginDto   from '../../domain/dto/AuthLoginDto';
+import * as jwt           from 'jsonwebtoken';
+import UserRepository     from '../../../users/domain/UserRepository';
+import {User}             from '../../../users/domain/entity/User';
+import config             from '../../../../../apps/mmc/config/config';
+import AuthLoginDto       from '../../domain/dto/AuthLoginDto';
+import {AuthEntitiesEnum} from '../../../../shared/domain/AuthEntitiesEnum';
 
 export default class AuthUserLogin
 {
@@ -34,7 +35,7 @@ export default class AuthUserLogin
             {
                 userId    : user.id,
                 username  : user.username,
-                entityType: 'USER'
+                entityType: AuthEntitiesEnum.USER
             },
             config.jwtSecret,
             {expiresIn: '1h'}

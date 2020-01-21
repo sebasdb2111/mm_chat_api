@@ -19,7 +19,7 @@ export default class PsychicCreate
         psychic.email           = psychicDto.email;
         psychic.firstName       = psychicDto.firstName;
         psychic.lastName        = psychicDto.lastName;
-        psychic.isActive        = psychicDto.isActive;
+        psychic.isActive        = true;
 
         psychic.hashPassword();
 

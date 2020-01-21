@@ -4,14 +4,16 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn
-}                                                       from 'typeorm';
+    UpdateDateColumn, OneToMany
+}                                               from 'typeorm';
 import {Length, IsNotEmpty, IsEmail, IsBoolean} from 'class-validator';
-import * as bcrypt                                      from 'bcryptjs';
-import PasswordIsNotValidException                      from '../../../auth/domain/exceptions/PasswordIsNotValidException';
+import * as bcrypt                              from 'bcryptjs';
+import PasswordIsNotValidException              from '../../../auth/domain/exceptions/PasswordIsNotValidException';
+import {ChatSessionMessage}                     from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
+import {ChatSession}                            from '../../../chatSessions/domain/entity/ChatSession';
 
 @Entity()
-@Unique(['username', 'email'])
+@Unique(['id', 'username', 'email'])
 export class Psychic
 {
     @PrimaryGeneratedColumn()
@@ -57,6 +59,12 @@ export class Psychic
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(type => ChatSession, chatSession => chatSession.psychic)
+    chatSessions: ChatSession[];
+
+    @OneToMany(type => ChatSessionMessage, messages => messages.psychic)
+    chatSessionMessages: ChatSessionMessage[];
 
     hashPassword(): any
     {

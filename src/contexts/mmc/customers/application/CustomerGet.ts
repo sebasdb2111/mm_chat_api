@@ -5,7 +5,7 @@ import CustomerRepository                    from '../domain/CustomerRepository'
 import CustomerNotExistGuard                 from '../../shared/application/CustomerNotExistGuard';
 import YouAreNotOwner                        from "../../shared/application/YouAreNotOwner";
 
-export default class CustomerCreate
+export default class CustomerGet
 {
     private repository: CustomerRepository;
 
@@ -14,20 +14,26 @@ export default class CustomerCreate
         this.repository = repository;
     }
 
-    async run(customerId: number, req: Request): Promise<Customer>
+    async run(customerId: number): Promise<Customer>
     {
-        await this.guard(customerId, req);
+        // await this.guard(customerId, req);
+        try {
+            console.log('0asdfasdf')
+            const customer: Customer = await this.repository.findOneOrFail(customerId);
 
-        const customer: Customer = await this.repository.findOneOrFail(customerId);
+            await new CustomerNotExistGuard(customerId, customer);
 
-        await new CustomerNotExistGuard(customerId, customer);
+            return Promise.resolve(customer);
+        }
+        catch (error) {
+            return Promise.reject(error)
+        }
 
-        return Promise.resolve(customer);
     }
 
-    async guard(customerId: number, req: Request)
-    {
-        const customerIdToken = GetIdUsernameAndEntityTypeFromToken(req);
-        await new YouAreNotOwner(customerId, customerIdToken.customerId);
-    }
+    // async guard(customerId: number, req: Request)
+    // {
+    //     const customerIdToken = GetIdUsernameAndEntityTypeFromToken(req);
+    //     await new YouAreNotOwner(customerId, customerIdToken.customerId);
+    // }
 }

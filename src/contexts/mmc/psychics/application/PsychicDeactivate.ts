@@ -3,7 +3,7 @@ import PsychicRepository          from '../domain/PsychicRepository';
 import PsychicDeactivateDto       from '../domain/dto/PsychicDeactivateDto';
 import PsychicNotExistGuard       from '../../shared/application/PsychicNotExistGuard';
 
-export default class PsychicCreate
+export default class PsychicDeactivate
 {
     private repository: PsychicRepository;
 
