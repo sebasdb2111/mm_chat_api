@@ -19,9 +19,8 @@ export default class AuthPsychicLogin
         const psychic: Psychic = await this.repository.findOneByUsername(authLoginDto.username);
 
         psychic.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
+        psychic.updateLastLogin();
 
-        // TODO: meter la fecha actual
-        // user.lastLogin = ;
         await this.repository.updateLastLogin(psychic.id, psychic);
 
         const psychicToken: string = await this.createJwt(psychic);

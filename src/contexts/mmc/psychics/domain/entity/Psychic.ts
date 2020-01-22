@@ -66,6 +66,11 @@ export class Psychic
     @OneToMany(type => ChatSessionMessage, messages => messages.psychic)
     chatSessionMessages: ChatSessionMessage[];
 
+    updateLastLogin(): any
+    {
+        this.lastLogin = new Date();
+    }
+
     hashPassword(): any
     {
         this.password = bcrypt.hashSync(this.password, 8);

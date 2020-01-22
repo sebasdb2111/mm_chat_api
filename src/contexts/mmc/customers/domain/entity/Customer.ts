@@ -66,6 +66,11 @@ export class Customer
     @OneToMany(type => ChatSessionMessage, messages => messages.customer)
     chatSessionMessages: ChatSessionMessage[];
 
+    updateLastLogin(): any
+    {
+        this.lastLogin = new Date();
+    }
+
     hashPassword(): any
     {
         this.password = bcrypt.hashSync(this.password, 8);
