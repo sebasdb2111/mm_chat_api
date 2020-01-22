@@ -15,10 +15,11 @@ export class ChatSessionMessageCreateController implements Controller
         return new Promise(async (resolve, reject) =>
         {
             const chatSessionMessageCreateDto: ChatSessionMessageCreateDto = new ChatSessionMessageCreateDto(
+                req.body.chatSessionId,
                 req.body.message,
-                req.body.userId,
-                req.body.psychicId,
-                req.body.customerId
+                res.locals.jwtPayload.customerId,
+                res.locals.jwtPayload.psychicId,
+                res.locals.jwtPayload.userId
             );
 
             try {

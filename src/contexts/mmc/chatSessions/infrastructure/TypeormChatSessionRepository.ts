@@ -1,7 +1,7 @@
 import {getRepository}           from 'typeorm';
 import {ChatSession}             from '../domain/entity/ChatSession';
 import ChatSessionRepository     from '../domain/ChatSessionRepository';
-import {EntitiesForRelationEnum} from "../../shared/domain/EntitiesForRelationEnum";
+import {EntitiesForRelationEnum} from '../../shared/domain/EntitiesForRelationEnum';
 
 export default class TypeormChatSessionRepository implements ChatSessionRepository
 {
@@ -12,6 +12,7 @@ export default class TypeormChatSessionRepository implements ChatSessionReposito
             id,
             {
                 relations: [
+                    EntitiesForRelationEnum.CHATSESSIONMESSAGES,
                     EntitiesForRelationEnum.OWNER,
                     EntitiesForRelationEnum.PSYCHIC,
                     EntitiesForRelationEnum.USER

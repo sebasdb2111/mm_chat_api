@@ -1,6 +1,7 @@
 export enum EntitiesForRelationEnum
 {
-    CHATSESSION = 'chat_session',
+    CHATSESSION = 'chatSession',
+    CHATSESSIONMESSAGES = 'chatSessionMessages',
     CUSTOMER = 'customer',
     OWNER = 'owner',
     PSYCHIC = 'psychic',

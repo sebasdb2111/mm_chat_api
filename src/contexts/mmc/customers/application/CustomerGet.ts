@@ -1,9 +1,9 @@
-import {Request}                             from 'express';
-import {GetIdUsernameAndEntityTypeFromToken} from '../../shared/application/GetIdUsernameAndEntityTypeFromToken';
+// import {Request}                             from 'express';
+// import {GetIdUsernameAndEntityTypeFromToken} from '../../shared/application/GetIdUsernameAndEntityTypeFromToken';
 import {Customer}                            from '../domain/entity/Customer';
 import CustomerRepository                    from '../domain/CustomerRepository';
 import CustomerNotExistGuard                 from '../../shared/application/CustomerNotExistGuard';
-import YouAreNotOwner                        from "../../shared/application/YouAreNotOwner";
+// import YouAreNotOwner                        from '../../shared/application/YouAreNotOwner';
 
 export default class CustomerGet
 {
@@ -18,7 +18,6 @@ export default class CustomerGet
     {
         // await this.guard(customerId, req);
         try {
-            console.log('0asdfasdf')
             const customer: Customer = await this.repository.findOneOrFail(customerId);
 
             await new CustomerNotExistGuard(customerId, customer);

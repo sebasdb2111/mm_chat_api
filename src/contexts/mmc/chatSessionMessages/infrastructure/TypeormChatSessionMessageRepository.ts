@@ -1,7 +1,7 @@
 import {getRepository}              from 'typeorm';
 import ChatSessionMessageRepository from '../domain/ChatSessionMessageRepository';
 import {ChatSessionMessage}         from '../domain/entity/ChatSessionMessage';
-import {EntitiesForRelationEnum}    from "../../shared/domain/EntitiesForRelationEnum";
+import {EntitiesForRelationEnum}    from '../../shared/domain/EntitiesForRelationEnum';
 
 export default class TypeormChatSessionMessageRepository implements ChatSessionMessageRepository
 {
@@ -13,10 +13,27 @@ export default class TypeormChatSessionMessageRepository implements ChatSessionM
             {
                 relations: [
                     EntitiesForRelationEnum.CHATSESSION,
-                    EntitiesForRelationEnum.OWNER,
+                    EntitiesForRelationEnum.CUSTOMER,
                     EntitiesForRelationEnum.PSYCHIC,
                     EntitiesForRelationEnum.USER
                 ]
+            });
+        return Promise.resolve(chatSessionMessage);
+    }
+
+    async findConversation(id: number): Promise<ChatSessionMessage[]>
+    {
+        const chatSessionMessageRepository             = getRepository(ChatSessionMessage);
+        const chatSessionMessage: ChatSessionMessage[] = await chatSessionMessageRepository.find(
+            {
+                relations: [
+                    EntitiesForRelationEnum.CHATSESSION,
+                    EntitiesForRelationEnum.CUSTOMER,
+                    EntitiesForRelationEnum.PSYCHIC,
+                    EntitiesForRelationEnum.USER
+                ],
+                where    : {chatSessionId: id},
+                order    : {id: 'ASC'}
             });
         return Promise.resolve(chatSessionMessage);
     }

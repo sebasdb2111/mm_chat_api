@@ -13,6 +13,6 @@ routes.use('/user', user);
 routes.use('/customer', customer);
 routes.use('/psychic', psychic);
 routes.use('/chat-session', chatSession);
-routes.use('/chat-sessionMessage', chatSessionMessage);
+routes.use('/chat-session-message', chatSessionMessage);
 
 export default routes;

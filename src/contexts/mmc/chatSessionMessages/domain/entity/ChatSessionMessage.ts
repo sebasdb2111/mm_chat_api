@@ -40,15 +40,15 @@ export class ChatSessionMessage
     @IsOptional()
     chatSession: ChatSession;
 
-    @ManyToOne(type => Customer, customer => customer.chatSessionMessages, { nullable: false })
+    @ManyToOne(type => Customer, customer => customer.chatSessionMessages, {nullable: true})
     @IsOptional()
     customer: Customer;
 
-    @ManyToOne(type => Psychic, psychic => psychic.chatSessionMessages, { nullable: false })
+    @ManyToOne(type => Psychic, psychic => psychic.chatSessionMessages, {nullable: true})
     @IsOptional()
     psychic: Psychic;
 
-    @ManyToOne(type => User, user => user.chatSessionMessages, { nullable: true })
+    @ManyToOne(type => User, user => user.chatSessionMessages, {nullable: true})
     @IsOptional()
     user: User;
 }
