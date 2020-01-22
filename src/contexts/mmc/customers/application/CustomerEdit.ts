@@ -3,7 +3,7 @@ import CustomerRepository    from '../domain/CustomerRepository';
 import CustomerEditDto       from '../domain/dto/CustomerEditDto';
 import CustomerNotExistGuard from '../../shared/application/CustomerNotExistGuard';
 
-export default class CustomerCreate
+export default class CustomerEdit
 {
     private repository: CustomerRepository;
 

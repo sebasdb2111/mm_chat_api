@@ -17,6 +17,7 @@ const userDeactivateController: UserDeactivateController = container.get('Apps.m
 router
     .post(
         '/',
+        CheckAuthentication,
         CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
         userCreateController.run.bind(userCreateController)
     );

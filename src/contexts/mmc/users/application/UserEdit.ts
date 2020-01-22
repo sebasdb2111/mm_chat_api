@@ -3,7 +3,7 @@ import UserRepository                   from '../domain/UserRepository';
 import UserEditDto                      from '../domain/dto/UserEditDto';
 import UserNotExistGuard                from '../../shared/application/UserNotExistGuard';
 
-export default class UserCreate
+export default class UserEdit
 {
     private repository: UserRepository;
 

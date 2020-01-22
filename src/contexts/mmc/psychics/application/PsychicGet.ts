@@ -2,7 +2,7 @@ import {Psychic}            from '../domain/entity/Psychic';
 import PsychicRepository    from '../domain/PsychicRepository';
 import PsychicNotExistGuard from '../../shared/application/PsychicNotExistGuard';
 
-export default class PsychicCreate
+export default class PsychicGet
 {
     private repository: PsychicRepository;
 
@@ -13,10 +13,16 @@ export default class PsychicCreate
 
     async run(psychicId: number): Promise<Psychic>
     {
-        const psychic: Psychic = await this.repository.findOneOrFail(psychicId);
+        try {
+            const psychic: Psychic = await this.repository.findOneOrFail(psychicId);
 
-        await new PsychicNotExistGuard(psychicId, psychic);
+            await new PsychicNotExistGuard(psychicId, psychic);
 
-        return Promise.resolve(psychic);
+            return Promise.resolve(psychic);
+        }
+        catch (error) {
+            return Promise.reject(error)
+        }
+
     }
 }

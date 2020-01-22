@@ -228,3 +228,104 @@ services:
   Apps.mmc.controllers.psychic.PsychicDeactivateController:
     class: ../../controllers/psychic/PsychicDeactivateController
     arguments: ['@Mmc.psychics.PsychicDeactivate']
+
+  ##########################################################################################
+  ########## CHAT SESSION
+  ##########################################################################################
+  Mmc.chatSessions.ChatSessionRepository:
+    class: ../../../../contexts/mmc/chatSessions/infrastructure/TypeormChatSessionRepository
+    arguments: []
+
+  #*************
+  # Create
+  #*************
+  Mmc.chatSessions.ChatSessionCreate:
+    class: ../../../../contexts/mmc/chatSessions/application/ChatSessionCreate
+    arguments: [
+      '@Mmc.chatSessions.ChatSessionRepository',
+      '@Mmc.customers.CustomerGet',
+      '@Mmc.psychics.PsychicGet',
+      '@Mmc.users.UserGet'
+      ]
+
+  Apps.mmc.controllers.chatSession.ChatSessionCreateController:
+    class: ../../controllers/chatSession/ChatSessionCreateController
+    arguments: ['@Mmc.chatSessions.ChatSessionCreate']
+
+  #*************
+  # Get
+  #*************
+  Mmc.chatSessions.ChatSessionGet:
+      class: ../../../../contexts/mmc/chatSessions/application/ChatSessionGet
+      arguments: [
+        '@Mmc.chatSessions.ChatSessionRepository',
+        '@Mmc.chatSessionMessages.ChatSessionMessageList'
+      ]
+
+  Apps.mmc.controllers.chatSession.ChatSessionGetController:
+    class: ../../controllers/chatSession/ChatSessionGetController
+    arguments: ['@Mmc.chatSessions.ChatSessionGet']
+
+  #*************
+  # Deactivate
+  #*************
+  Mmc.chatSessions.ChatSessionDeactivate:
+      class: ../../../../contexts/mmc/chatSessions/application/ChatSessionDeactivate
+      arguments: ['@Mmc.chatSessions.ChatSessionRepository']
+
+  Apps.mmc.controllers.chatSession.ChatSessionDeactivateController:
+    class: ../../controllers/chatSession/ChatSessionDeactivateController
+    arguments: ['@Mmc.chatSessions.ChatSessionDeactivate']
+
+  ##########################################################################################
+  ########## CHAT SESSION MESSAGE
+  ##########################################################################################
+  Mmc.chatSessionMessages.ChatSessionMessageRepository:
+    class: ../../../../contexts/mmc/chatSessionMessages/infrastructure/TypeormChatSessionMessageRepository
+    arguments: []
+
+  #*************
+  # Create
+  #*************
+  Mmc.chatSessionMessages.ChatSessionMessageCreate:
+    class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageCreate
+    arguments: [
+      '@Mmc.chatSessionMessages.ChatSessionMessageRepository',
+      '@Mmc.chatSessions.ChatSessionGet',
+      '@Mmc.customers.CustomerGet',
+      '@Mmc.psychics.PsychicGet',
+      '@Mmc.users.UserGet'
+    ]
+
+  Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageCreateController:
+    class: ../../controllers/chatSessionMessage/ChatSessionMessageCreateController
+    arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageCreate']
+
+  #*************
+  # Get
+  #*************
+  Mmc.chatSessionMessages.ChatSessionMessageGet:
+      class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageGet
+      arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageRepository']
+
+  Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageGetController:
+    class: ../../controllers/chatSessionMessage/ChatSessionMessageGetController
+    arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageGet']
+
+  #*************
+  # List
+  #*************
+  Mmc.chatSessionMessages.ChatSessionMessageList:
+      class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageList
+      arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageRepository']
+
+  #*************
+  # Delete
+  #*************
+  Mmc.chatSessionMessages.ChatSessionMessageDelete:
+      class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageDelete
+      arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageRepository']
+
+  Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageDeleteController:
+    class: ../../controllers/chatSessionMessage/ChatSessionMessageDeleteController
+    arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageDelete']

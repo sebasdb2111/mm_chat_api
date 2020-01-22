@@ -3,6 +3,7 @@ import config             from '../../../../../apps/mmc/config/config';
 import CustomerRepository from '../../../customers/domain/CustomerRepository';
 import {Customer}         from '../../../customers/domain/entity/Customer';
 import AuthLoginDto       from '../../domain/dto/AuthLoginDto';
+import {AuthEntitiesEnum} from '../../../../shared/domain/AuthEntitiesEnum';
 
 export default class AuthCustomerLogin
 {
@@ -34,7 +35,7 @@ export default class AuthCustomerLogin
             {
                 customerId: customer.id,
                 username  : customer.username,
-                entityType: 'CUSTOMER'
+                entityType: AuthEntitiesEnum.CUSTOMER
             },
             config.jwtSecret,
             {expiresIn: '1h'}

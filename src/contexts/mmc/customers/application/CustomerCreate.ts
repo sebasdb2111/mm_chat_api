@@ -19,7 +19,7 @@ export default class CustomerCreate
         customer.email           = customerDto.email;
         customer.firstName       = customerDto.firstName;
         customer.lastName        = customerDto.lastName;
-        customer.isActive        = customerDto.isActive;
+        customer.isActive        = true;
 
         customer.hashPassword();
 

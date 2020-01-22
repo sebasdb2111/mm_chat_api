@@ -19,7 +19,7 @@ export class CustomerGetController implements Controller
 
             try {
 
-                const customer = await this.customerGet.run(id, req);
+                const customer = await this.customerGet.run(id);
 
                 resolve(res.status(httpStatus.OK).send(customer));
             }

@@ -22,7 +22,6 @@ export class UserCreateController implements Controller
                 req.body.email,
                 req.body.firstName,
                 req.body.lastName,
-                Boolean(req.body.isActive)
             );
 
             try {
