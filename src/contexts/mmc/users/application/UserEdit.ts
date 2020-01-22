@@ -1,11 +1,9 @@
 import {User}                           from '../domain/entity/User';
 import UserRepository                   from '../domain/UserRepository';
-import UserCreateDto                    from '../domain/dto/UserCreateDto';
-import UserEditDto                      from "../domain/dto/UserEditDto";
-import {isNullOrUndefined, isUndefined} from "util";
-import UserNotExistGuard                from "../../shared/application/UserNotExistGuard";
+import UserEditDto                      from '../domain/dto/UserEditDto';
+import UserNotExistGuard                from '../../shared/application/UserNotExistGuard';
 
-export default class UserCreate
+export default class UserEdit
 {
     private repository: UserRepository;
 
@@ -25,6 +23,8 @@ export default class UserCreate
         user.firstName = userEditDto.firstName ? userEditDto.firstName : user.firstName;
         user.lastName  = userEditDto.lastName ? userEditDto.lastName : user.lastName;
 
-        return this.repository.update(user);
+        const editedUser: User = await this.repository.update(user);
+
+        return Promise.resolve(editedUser);
     }
 }

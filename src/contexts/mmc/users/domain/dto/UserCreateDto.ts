@@ -6,7 +6,6 @@ export default class UserCreateDto
     public email: string;
     public firstName: string;
     public lastName: string;
-    public isActive: boolean;
 
     constructor(
         username: string,
@@ -15,7 +14,6 @@ export default class UserCreateDto
         email: string,
         firstName: string,
         lastName: string,
-        isActive: boolean,
     )
     {
         this.username  = username;
@@ -24,6 +22,5 @@ export default class UserCreateDto
         this.email     = email;
         this.firstName = firstName;
         this.lastName  = lastName;
-        this.isActive  = isActive;
     }
 }

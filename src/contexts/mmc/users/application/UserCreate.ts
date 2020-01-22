@@ -20,10 +20,12 @@ export default class UserCreate
         user.email       = userDto.email;
         user.firstName   = userDto.firstName;
         user.lastName    = userDto.lastName;
-        user.isActive    = userDto.isActive;
+        user.isActive    = true;
 
         user.hashPassword();
 
-        return this.repository.save(user);
+        const newUser: User = await this.repository.save(user);
+
+        return Promise.resolve(newUser);
     }
 }

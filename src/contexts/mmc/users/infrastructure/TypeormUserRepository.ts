@@ -7,28 +7,32 @@ export default class TypeormUserRepository implements UserRepository
     async findOneOrFail(id: number): Promise<User>
     {
         const userRepository = getRepository(User);
-        return await userRepository.findOneOrFail(id);
+        const user: User     = await userRepository.findOneOrFail(id);
+        return Promise.resolve(user);
     }
 
     async findOneByUsername(username: string): Promise<User>
     {
         const userRepository = getRepository(User);
-        return await userRepository.findOneOrFail({where: {username}});
+        const user: User     = await userRepository.findOneOrFail({where: {username}});
+        return Promise.resolve(user);
     }
 
     async save(user: User): Promise<User>
     {
         const userRepository = getRepository(User);
-        return await userRepository.save(user);
+        const saveUser: User = await userRepository.save(user);
+        return Promise.resolve(saveUser);
     }
 
     async update(user: User): Promise<User>
     {
-        const userRepository = getRepository(User);
-        return await userRepository.save(user);
+        const userRepository   = getRepository(User);
+        const updateUser: User = await userRepository.save(user);
+        return Promise.resolve(updateUser);
     }
 
-    async updateIsActivate(id: number, user: User): Promise<void>
+    async updateIsActive(id: number, user: User): Promise<void>
     {
         const userRepository = getRepository(User);
         await userRepository.update(id, {isActive: user.isActive});
@@ -38,5 +42,11 @@ export default class TypeormUserRepository implements UserRepository
     {
         const userRepository = getRepository(User);
         await userRepository.update(id, {password: user.password});
+    }
+
+    async updateLastLogin(id: number, user: User): Promise<void>
+    {
+        const userRepository = getRepository(User);
+        await userRepository.update(id, {lastLogin: user.lastLogin});
     }
 }

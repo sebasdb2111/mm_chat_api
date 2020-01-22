@@ -1,4 +1,4 @@
-export default class UserDeactivateDtoAinhoa
+export default class UserDeactivateDto
 {
     public id: number;
     public isActive: boolean;

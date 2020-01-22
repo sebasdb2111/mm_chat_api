@@ -3,7 +3,7 @@ import UserRepository    from '../domain/UserRepository';
 import UserDeactivateDto from '../domain/dto/UserDeactivateDto';
 import UserNotExistGuard from '../../shared/application/UserNotExistGuard';
 
-export default class UserCreate
+export default class UserDeactivate
 {
     private repository: UserRepository;
 
@@ -19,6 +19,8 @@ export default class UserCreate
 
         await new UserNotExistGuard(userDeactivateDto.id, user);
 
-        return this.repository.updateIsActivate(userDeactivateDto.id, user);
+        const userDeactivated = await this.repository.updateIsActive(userDeactivateDto.id, user);
+
+        return Promise.resolve(userDeactivated);
     }
 }

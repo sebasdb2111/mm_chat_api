@@ -1,9 +1,9 @@
-import {Request, Response}        from 'express';
-import UserCreate                 from '../../../../contexts/mmc/users/application/UserCreate';
-import * as httpStatus            from 'http-status';
-import Controller                 from '../Controller';
-import UserCreateDto              from '../../../../contexts/mmc/users/domain/dto/UserCreateDto';
-import UserAlreadyExistsException from '../../../../contexts/mmc/users/domain/exceptions/UserAlreadyExistsException';
+import {Request, Response}            from 'express';
+import * as httpStatus                from 'http-status';
+import Controller                     from '../Controller';
+import UserCreate                     from '../../../../contexts/mmc/users/application/UserCreate';
+import UserCreateDto                  from '../../../../contexts/mmc/users/domain/dto/UserCreateDto';
+import UserAlreadyExistsException     from '../../../../contexts/mmc/users/domain/exceptions/UserAlreadyExistsException';
 
 export class UserCreateController implements Controller
 {
@@ -13,26 +13,30 @@ export class UserCreateController implements Controller
 
     async run(req: Request, res: Response)
     {
-        const userCreateDto: UserCreateDto = new UserCreateDto(
-            req.body.username,
-            req.body.password,
-            req.body.role,
-            req.body.email,
-            req.body.firstName,
-            req.body.lastName,
-            req.body.isActive,
-        );
+        return new Promise(async (resolve, reject) =>
+        {
+            const userCreateDto: UserCreateDto = new UserCreateDto(
+                req.body.username,
+                req.body.password,
+                req.body.role,
+                req.body.email,
+                req.body.firstName,
+                req.body.lastName,
+            );
 
-        try {
-            const user = await this.userCreate.run(userCreateDto);
-            res.status(httpStatus.CREATED).send(user);
-        }
-        catch (error) {
-            if (error instanceof UserAlreadyExistsException) {
-                res.status(httpStatus.BAD_REQUEST).send(error.message);
-            } else {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+            try {
+                const user = await this.userCreate.run(userCreateDto);
+                resolve(res.status(httpStatus.CREATED).send(user));
             }
-        }
+            catch (error) {
+                let httpStatusError = httpStatus.INTERNAL_SERVER_ERROR;
+
+                if (error instanceof UserAlreadyExistsException) {
+                    httpStatusError = httpStatus.BAD_REQUEST;
+                }
+
+                reject(res.status(httpStatusError).send(error.message));
+            }
+        });
     }
 }
