@@ -11,6 +11,7 @@ import * as bcrypt                              from 'bcryptjs';
 import PasswordIsNotValidException              from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 import {ChatSessionMessage}                     from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
 import {ChatSession}                            from '../../../chatSessions/domain/entity/ChatSession';
+import {Credit}                                 from '../../../credits/domain/entity/Credit';
 
 @Entity()
 @Unique(['id', 'username', 'email'])
@@ -60,11 +61,19 @@ export class Psychic
     @UpdateDateColumn()
     updatedAt: Date;
 
+    @OneToMany(type => Credit, credit => credit.psychic)
+    credits: Credit[];
+
     @OneToMany(type => ChatSession, chatSession => chatSession.psychic)
     chatSessions: ChatSession[];
 
     @OneToMany(type => ChatSessionMessage, messages => messages.psychic)
     chatSessionMessages: ChatSessionMessage[];
+
+    updateLastLogin(): any
+    {
+        this.lastLogin = new Date();
+    }
 
     hashPassword(): any
     {

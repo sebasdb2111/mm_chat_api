@@ -1,13 +1,21 @@
-import {getRepository}    from 'typeorm';
-import {Customer}         from '../domain/entity/Customer';
-import CustomerRepository from '../domain/CustomerRepository';
+import {getRepository}           from 'typeorm';
+import {Customer}                from '../domain/entity/Customer';
+import CustomerRepository        from '../domain/CustomerRepository';
+import {EntitiesForRelationEnum} from "../../shared/domain/EntitiesForRelationEnum";
 
 export default class TypeormCustomerRepository implements CustomerRepository
 {
     async findOneOrFail(id: number): Promise<Customer>
     {
         const customerRepository = getRepository(Customer);
-        const customer: Customer = await customerRepository.findOneOrFail(id);
+        const customer: Customer = await customerRepository.findOneOrFail(
+            id,
+            {
+                relations: [
+                    EntitiesForRelationEnum.CREDITS,
+                ]
+            }
+        );
         return Promise.resolve(customer);
     }
 

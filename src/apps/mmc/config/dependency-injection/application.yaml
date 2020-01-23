@@ -329,3 +329,28 @@ services:
   Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageDeleteController:
     class: ../../controllers/chatSessionMessage/ChatSessionMessageDeleteController
     arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageDelete']
+
+  ##########################################################################################
+  ########## CREDIT
+  ##########################################################################################
+  Mmc.credits.CreditRepository:
+    class: ../../../../contexts/mmc/credits/infrastructure/TypeormCreditRepository
+    arguments: []
+
+  #*************
+  # Create
+  #*************
+  Mmc.credits.CreditCreate:
+    class: ../../../../contexts/mmc/credits/application/CreditCreate
+    arguments: ['@Mmc.credits.CreditRepository']
+
+  Apps.mmc.controllers.credit.CreditCreateController:
+      class: ../../controllers/credit/CreditCreateController
+      arguments: ['@Mmc.credits.CreditCreate']
+
+  #*************
+  # Get
+  #*************
+  Mmc.credits.CreditGet:
+      class: ../../../../contexts/mmc/credits/application/CreditGet
+      arguments: ['@Mmc.credits.ChatSessionMessageRepository']

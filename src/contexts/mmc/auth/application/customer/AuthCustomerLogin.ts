@@ -19,9 +19,8 @@ export default class AuthCustomerLogin
         const customer: Customer = await this.repository.findOneByUsername(authLoginDto.username);
 
         customer.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
+        customer.updateLastLogin();
 
-        // TODO: meter la fecha actual
-        // user.lastLogin = ;
         await this.repository.updateLastLogin(customer.id, customer);
 
         const customerToken: string = await this.createJwt(customer);
