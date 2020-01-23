@@ -11,6 +11,7 @@ import * as bcrypt                              from 'bcryptjs';
 import PasswordIsNotValidException              from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 import {ChatSession}                            from '../../../chatSessions/domain/entity/ChatSession';
 import {ChatSessionMessage}                     from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
+import {Credit}                                 from "../../../credits/domain/entity/Credit";
 
 @Entity()
 @Unique(['id', 'username', 'email'])
@@ -59,6 +60,9 @@ export class Customer
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(type => Credit, credit => credit.customer)
+    credits: Credit[];
 
     @OneToMany(type => ChatSession, chatSession => chatSession.owner)
     chatSessions: ChatSession[];
