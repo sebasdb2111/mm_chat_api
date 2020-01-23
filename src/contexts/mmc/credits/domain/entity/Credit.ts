@@ -5,10 +5,11 @@ import {
     Unique,
     CreateDateColumn,
     UpdateDateColumn, ManyToOne, IsNull
-} from 'typeorm';
+}                             from 'typeorm';
 import {IsNumber, IsOptional} from 'class-validator';
 import {Psychic}              from '../../../psychics/domain/entity/Psychic';
 import {Customer}             from '../../../customers/domain/entity/Customer';
+import {Transaction}          from '../../../trasnsactions/domain/entity/Transaction';
 
 @Entity()
 @Unique(['id'])
@@ -42,6 +43,10 @@ export class Credit
     @ManyToOne(type => Psychic, psychic => psychic.credits, {nullable: true})
     @IsOptional()
     psychic: Psychic;
+
+    @ManyToOne(type => Transaction, transaction => transaction.credits, {nullable: false})
+    @IsOptional()
+    transaction: Transaction;
 
 }
 

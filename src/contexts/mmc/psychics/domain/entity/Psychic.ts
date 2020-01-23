@@ -11,7 +11,7 @@ import * as bcrypt                              from 'bcryptjs';
 import PasswordIsNotValidException              from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 import {ChatSessionMessage}                     from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
 import {ChatSession}                            from '../../../chatSessions/domain/entity/ChatSession';
-import {Credit}                                 from "../../../credits/domain/entity/Credit";
+import {Credit}                                 from '../../../credits/domain/entity/Credit';
 
 @Entity()
 @Unique(['id', 'username', 'email'])
