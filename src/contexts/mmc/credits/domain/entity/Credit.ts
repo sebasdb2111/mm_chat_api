@@ -4,7 +4,8 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn, ManyToOne, IsNull
+    UpdateDateColumn,
+    ManyToOne
 }                             from 'typeorm';
 import {IsNumber, IsOptional} from 'class-validator';
 import {Psychic}              from '../../../psychics/domain/entity/Psychic';
