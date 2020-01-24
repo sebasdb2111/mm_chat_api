@@ -4,6 +4,7 @@ export enum EntitiesForRelationEnum
     CHATSESSIONMESSAGES = 'chatSessionMessages',
     CREDITS = 'credits',
     CUSTOMER = 'customer',
+    OFFER = 'offer',
     OWNER = 'owner',
     PSYCHIC = 'psychic',
     USER = 'user'

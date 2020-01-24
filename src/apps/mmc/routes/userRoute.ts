@@ -18,7 +18,7 @@ router
     .post(
         '/',
         CheckAuthentication,
-        CheckRole([UserRoleEnum.ADMIN, UserRoleEnum.ANIMATOR]),
+        CheckRole([UserRoleEnum.ADMIN]),
         userCreateController.run.bind(userCreateController)
     );
 

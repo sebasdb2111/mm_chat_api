@@ -1,7 +1,7 @@
 import {getRepository}           from 'typeorm';
 import {Customer}                from '../domain/entity/Customer';
 import CustomerRepository        from '../domain/CustomerRepository';
-import {EntitiesForRelationEnum} from "../../shared/domain/EntitiesForRelationEnum";
+import {EntitiesForRelationEnum} from '../../shared/domain/EntitiesForRelationEnum';
 
 export default class TypeormCustomerRepository implements CustomerRepository
 {
