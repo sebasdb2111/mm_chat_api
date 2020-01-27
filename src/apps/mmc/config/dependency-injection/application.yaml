@@ -291,9 +291,11 @@ services:
     class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageCreate
     arguments: [
       '@Mmc.chatSessionMessages.ChatSessionMessageRepository',
+      '@Mmc.credits.CreditListByCustomerIdAndPsychicId',
+      '@Mmc.credits.CreditDecrementCoinsPerMessage',
       '@Mmc.chatSessions.ChatSessionGet',
       '@Mmc.customers.CustomerGet',
-      '@Mmc.psychics.PsychicGet',
+      '@Mmc.psychicOffers.PsychicOfferGet',
       '@Mmc.users.UserGet'
     ]
 
@@ -360,9 +362,19 @@ services:
       class: ../../../../contexts/mmc/credits/application/CreditGet
       arguments: ['@Mmc.credits.CreditRepository']
 
-#  Apps.mmc.controllers.credit.CreditGetController:
-#        class: ../../controllers/credit/CreditGetController
-#        arguments: ['@Mmc.credits.CreditGet']
+  #*************
+  # Get
+  #*************
+  Mmc.credits.CreditListByCustomerIdAndPsychicId:
+      class: ../../../../contexts/mmc/credits/application/CreditListByCustomerIdAndPsychicId
+      arguments: ['@Mmc.credits.CreditRepository']
+
+  #*************
+  # Get
+  #*************
+  Mmc.credits.CreditDecrementCoinsPerMessage:
+      class: ../../../../contexts/mmc/credits/application/CreditDecrementCoinsPerMessage
+      arguments: ['@Mmc.credits.CreditRepository']
 
   ##########################################################################################
   ########## TRANSACTION
