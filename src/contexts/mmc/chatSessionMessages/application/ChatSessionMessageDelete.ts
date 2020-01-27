@@ -1,6 +1,6 @@
 import {ChatSessionMessage}            from '../domain/entity/ChatSessionMessage';
 import ChatSessionMessageRepository    from '../domain/ChatSessionMessageRepository';
-import ChatSessionDeletedDto from '../domain/dto/ChatSessionDeletedDto';
+import ChatSessionDeletedDto           from '../domain/dto/ChatSessionMessageDeletedDto';
 import ChatSessionMessageNotExistGuard from '../../shared/application/ChatSessionMessageNotExistGuard';
 
 export default class ChatSessionMessageDelete
@@ -15,7 +15,7 @@ export default class ChatSessionMessageDelete
     async run(chatSessionDeactivateDto: ChatSessionDeletedDto): Promise<void>
     {
         const chatSession: ChatSessionMessage = await this.repository.findOneOrFail(chatSessionDeactivateDto.id);
-        chatSession.deleted    = chatSessionDeactivateDto.deleted;
+        chatSession.deleted                   = chatSessionDeactivateDto.deleted;
 
         await new ChatSessionMessageNotExistGuard(chatSessionDeactivateDto.id, chatSession);
 

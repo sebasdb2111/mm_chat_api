@@ -4,14 +4,16 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn, OneToMany
+    UpdateDateColumn,
+    OneToMany
 }                                               from 'typeorm';
 import {Length, IsNotEmpty, IsEmail, IsBoolean} from 'class-validator';
 import * as bcrypt                              from 'bcryptjs';
 import PasswordIsNotValidException              from '../../../auth/domain/exceptions/PasswordIsNotValidException';
 import {ChatSession}                            from '../../../chatSessions/domain/entity/ChatSession';
 import {ChatSessionMessage}                     from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
-import {Credit}                                 from "../../../credits/domain/entity/Credit";
+import {Credit}                                 from '../../../credits/domain/entity/Credit';
+import {Transaction}                            from '../../../transactions/domain/entity/Transaction';
 
 @Entity()
 @Unique(['id', 'username', 'email'])
@@ -63,6 +65,9 @@ export class Customer
 
     @OneToMany(type => Credit, credit => credit.customer)
     credits: Credit[];
+
+    @OneToMany(type => Transaction, transaction => transaction.customer)
+    transactions: Transaction[];
 
     @OneToMany(type => ChatSession, chatSession => chatSession.owner)
     chatSessions: ChatSession[];

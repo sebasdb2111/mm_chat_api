@@ -4,13 +4,14 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn, OneToMany
-}                      from 'typeorm';
-import {IsNumber}      from 'class-validator';
-import {PsychicOffers} from '../../../psychicOffers/domain/entity/PsychicOffers';
-import {Transaction}   from '../../../trasnsactions/domain/entity/Transaction';
+    UpdateDateColumn,
+    OneToMany
+}                     from 'typeorm';
+import {IsNumber}     from 'class-validator';
+import {PsychicOffer} from '../../../psychicOffers/domain/entity/PsychicOffer';
+import {CurrencyEnum} from '../../../../shared/domain/CurrencyEnum';
 
-export enum PaymentTypeEnum
+export enum TypeEnum
 {
     TIME = 'TIME',
     COIN = 'COIN',
@@ -25,14 +26,22 @@ export class Offer
 
     @Column({
         type   : 'enum',
-        enum   : PaymentTypeEnum,
-        default: PaymentTypeEnum.COIN
+        enum   : TypeEnum,
+        default: TypeEnum.COIN
     })
-    typePayment: string;
+    type: string;
 
     @Column()
     @IsNumber()
     price: number;
+
+
+    @Column({
+        type   : 'enum',
+        enum   : CurrencyEnum,
+        default: CurrencyEnum.EURO
+    })
+    currency: CurrencyEnum;
 
     @Column()
     @IsNumber()
@@ -46,9 +55,6 @@ export class Offer
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @OneToMany(type => PsychicOffers, psychicOffer => psychicOffer.offer)
-    psychicOffers: PsychicOffers[];
-
-    @OneToMany(type => Transaction, transaction => transaction.offer)
-    transactions: Transaction[];
+    @OneToMany(type => PsychicOffer, psychicOffer => psychicOffer.offer)
+    psychicOffers: PsychicOffer[];
 }

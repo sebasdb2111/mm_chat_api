@@ -4,14 +4,19 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn, ManyToOne, OneToOne, JoinColumn
-}                from 'typeorm';
-import {Offer}   from '../../../offers/domain/entity/Offer';
-import {Psychic} from '../../../psychics/domain/entity/Psychic';
+    UpdateDateColumn,
+    ManyToOne,
+    OneToOne,
+    JoinColumn,
+    OneToMany
+}                    from 'typeorm';
+import {Offer}       from '../../../offers/domain/entity/Offer';
+import {Psychic}     from '../../../psychics/domain/entity/Psychic';
+import {Transaction} from '../../../transactions/domain/entity/Transaction';
 
 @Entity()
 @Unique(['id'])
-export class PsychicOffers
+export class PsychicOffer
 {
     @PrimaryGeneratedColumn()
     id: number;
@@ -30,4 +35,7 @@ export class PsychicOffers
     @OneToOne(type => Psychic, {nullable: false})
     @JoinColumn()
     psychic: Psychic;
+
+    @OneToMany(type => Transaction, transaction => transaction.psychicOffer)
+    transactions: Transaction[];
 }

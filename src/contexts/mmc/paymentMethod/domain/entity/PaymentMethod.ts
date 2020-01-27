@@ -4,9 +4,9 @@ import {
     Column,
     Unique, OneToMany,
 }                    from 'typeorm';
-import {Transaction} from '../../../trasnsactions/domain/entity/Transaction';
+import {Transaction} from '../../../transactions/domain/entity/Transaction';
 
-export enum MethodPaymentTypeEnum
+export enum PaymentMethodTypeEnum
 {
     PAYPAL     = 'PAYPAL',
     CREDITCARD = 'CREDITCARD',
@@ -14,18 +14,18 @@ export enum MethodPaymentTypeEnum
 
 @Entity()
 @Unique(['id'])
-export class MethodPayment
+export class PaymentMethod
 {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({
         type   : 'enum',
-        enum   : MethodPaymentTypeEnum,
-        default: MethodPaymentTypeEnum.PAYPAL
+        enum   : PaymentMethodTypeEnum,
+        default: PaymentMethodTypeEnum.PAYPAL
     })
     method: string;
 
-    @OneToMany(type => Transaction, transaction => transaction.methodPayment)
+    @OneToMany(type => Transaction, transaction => transaction.paymentMethod)
     transactions: Transaction[];
 }

@@ -342,7 +342,12 @@ services:
   #*************
   Mmc.credits.CreditCreate:
     class: ../../../../contexts/mmc/credits/application/CreditCreate
-    arguments: ['@Mmc.credits.CreditRepository']
+    arguments: [
+      '@Mmc.credits.CreditRepository',
+      '@Mmc.customers.CustomerGet',
+      '@Mmc.psychics.PsychicGet',
+      '@Mmc.transactions.TransactionGet'
+    ]
 
   Apps.mmc.controllers.credit.CreditCreateController:
       class: ../../controllers/credit/CreditCreateController
@@ -353,4 +358,81 @@ services:
   #*************
   Mmc.credits.CreditGet:
       class: ../../../../contexts/mmc/credits/application/CreditGet
-      arguments: ['@Mmc.credits.ChatSessionMessageRepository']
+      arguments: ['@Mmc.credits.CreditRepository']
+
+#  Apps.mmc.controllers.credit.CreditGetController:
+#        class: ../../controllers/credit/CreditGetController
+#        arguments: ['@Mmc.credits.CreditGet']
+
+  ##########################################################################################
+  ########## TRANSACTION
+  ##########################################################################################
+  Mmc.transactions.TransactionRepository:
+    class: ../../../../contexts/mmc/transactions/infrastructure/TypeormTransactionRepository
+    arguments: []
+
+  #*************
+  # Get
+  #*************
+  Mmc.transactions.TransactionGet:
+    class: ../../../../contexts/mmc/transactions/application/TransactionGet
+    arguments: ['@Mmc.transactions.TransactionRepository']
+
+  #*************
+  # Create
+  #*************
+  Mmc.transactions.TransactionCreate:
+    class: ../../../../contexts/mmc/transactions/application/TransactionCreate
+    arguments: [
+      '@Mmc.transactions.TransactionRepository',
+      '@Mmc.customers.CustomerGet',
+      '@Mmc.paymentMethods.PaymentMethodGet',
+      '@Mmc.credits.CreditCreate',
+      '@Mmc.psychicOffers.PsychicOfferGet'
+    ]
+
+  Apps.mmc.controllers.transaction.TransactionCreateController:
+      class: ../../controllers/transaction/TransactionCreateController
+      arguments: ['@Mmc.transactions.TransactionCreate']
+
+  ##########################################################################################
+  ########## OFFER
+  ##########################################################################################
+  Mmc.offers.OfferRepository:
+    class: ../../../../contexts/mmc/offers/infrastructure/TypeormOfferRepository
+    arguments: []
+
+  #*************
+  # Get
+  #*************
+  Mmc.offers.OfferGet:
+      class: ../../../../contexts/mmc/offers/application/OfferGet
+      arguments: ['@Mmc.offers.OfferRepository']
+
+  ##########################################################################################
+  ########## PAYMENT METHOD
+  ##########################################################################################
+  Mmc.paymentMethod.PaymentMethodRepository:
+    class: ../../../../contexts/mmc/paymentMethod/infrastructure/TypeormPaymentMethodRepository
+    arguments: []
+
+  #*************
+  # Get
+  #*************
+  Mmc.paymentMethods.PaymentMethodGet:
+      class: ../../../../contexts/mmc/paymentMethod/application/PaymentMethodGet
+      arguments: ['@Mmc.paymentMethod.PaymentMethodRepository']
+
+  ##########################################################################################
+  ########## PSYCHIC OFFER
+  ##########################################################################################
+  Mmc.psychicOffers.PsychicOfferRepository:
+    class: ../../../../contexts/mmc/psychicOffers/infrastructure/TypeormPsychicOfferRepository
+    arguments: []
+
+  #*************
+  # Get
+  #*************
+  Mmc.psychicOffers.PsychicOfferGet:
+    class: ../../../../contexts/mmc/psychicOffers/application/PsychicOfferGet
+    arguments: ['@Mmc.psychicOffers.PsychicOfferRepository']

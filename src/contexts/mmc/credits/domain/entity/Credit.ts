@@ -10,7 +10,7 @@ import {
 import {IsNumber, IsOptional} from 'class-validator';
 import {Psychic}              from '../../../psychics/domain/entity/Psychic';
 import {Customer}             from '../../../customers/domain/entity/Customer';
-import {Transaction}          from '../../../trasnsactions/domain/entity/Transaction';
+import {Transaction}          from '../../../transactions/domain/entity/Transaction';
 
 @Entity()
 @Unique(['id'])
