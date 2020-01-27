@@ -9,6 +9,7 @@ import CreditCreateDto       from '../../credits/domain/dto/CreditCreateDto';
 import CreditCreate          from '../../credits/application/CreditCreate';
 import {PsychicOffer}        from '../../psychicOffers/domain/entity/PsychicOffer';
 import PsychicOfferGet       from '../../psychicOffers/application/PsychicOfferGet';
+import {TypeOfferEnum}       from '../../offers/domain/enum/TypeOfferEnum';
 
 export default class TransactionCreate
 {
@@ -52,8 +53,8 @@ export default class TransactionCreate
 
             // Si la respuesta de PayPal o de plataforma de pago por tajeta es OK en tonces crear credito.
             const createCreditDto: CreditCreateDto = new CreditCreateDto(
-                (psychicOffer.offer.type === 'TIME') ? psychicOffer.offer.quantity : null,
-                (psychicOffer.offer.type === 'COIN') ? psychicOffer.offer.quantity : null,
+                (psychicOffer.offer.type === TypeOfferEnum.TIME) ? psychicOffer.offer.quantity : null,
+                (psychicOffer.offer.type === TypeOfferEnum.COIN) ? psychicOffer.offer.quantity : null,
                 psychicOffer.psychic.id,
                 transactionDto.customerId,
                 transactionSave.id

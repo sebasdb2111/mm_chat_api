@@ -3,7 +3,7 @@ import ChatSessionRepository     from '../domain/ChatSessionRepository';
 import ChatSessionNotExistGuard  from '../../shared/application/ChatSessionNotExistGuard';
 import ChatSessionMessageList    from '../../chatSessionMessages/application/ChatSessionMessageList';
 // import {ChatSessionMessage}      from '../../chatSessionMessages/domain/entity/ChatSessionMessage';
-import {IChatSessionCoversation} from '../domain/interfaces/IChatSessionCoversation';
+// import {IChatSessionCoversation} from '../domain/interfaces/IChatSessionCoversation';
 // import {IMessage}                from '../../shared/domain/interfaces/IMessage';
 
 export default class ChatSessionGet
@@ -19,13 +19,18 @@ export default class ChatSessionGet
 
     async run(chatSessionId: number): Promise<ChatSession>
     {
-        const chatSession: ChatSession                     = await this.repository.findOneOrFail(chatSessionId);
-        // const chatSessionMessageList: ChatSessionMessage[] = await this.chatSessionMessageList.run(chatSessionId);
-        // const chatSessionConversation: IChatSessionCoversation = await this.cleanResponse(chatSession, chatSessionMessageList);
+        try {
+            const chatSession: ChatSession = await this.repository.findOneOrFail(chatSessionId);
+            // const chatSessionMessageList: ChatSessionMessage[] = await this.chatSessionMessageList.run(chatSessionId);
+            // const chatSessionConversation: IChatSessionCoversation = await this.cleanResponse(chatSession, chatSessionMessageList);
 
-        await new ChatSessionNotExistGuard(chatSessionId, chatSession);
+            await new ChatSessionNotExistGuard(chatSessionId, chatSession);
 
-        return Promise.resolve(chatSession);
+            return Promise.resolve(chatSession);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
 
     // async cleanResponse(chatSession: ChatSession, chatSessionMessageList: ChatSessionMessage[]): Promise<IChatSessionCoversation>

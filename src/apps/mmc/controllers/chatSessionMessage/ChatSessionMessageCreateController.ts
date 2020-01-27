@@ -14,16 +14,17 @@ export class ChatSessionMessageCreateController implements Controller
     {
         return new Promise(async (resolve, reject) =>
         {
-            const chatSessionMessageCreateDto: ChatSessionMessageCreateDto = new ChatSessionMessageCreateDto(
-                req.body.chatSessionId,
-                req.body.message,
-                res.locals.jwtPayload.customerId,
-                res.locals.jwtPayload.psychicId,
-                res.locals.jwtPayload.userId
-            );
-
             try {
+                const chatSessionMessageCreateDto: ChatSessionMessageCreateDto = new ChatSessionMessageCreateDto(
+                    req.body.chatSessionId,
+                    req.body.message,
+                    res.locals.jwtPayload.customerId,
+                    res.locals.jwtPayload.psychicId,
+                    res.locals.jwtPayload.userId
+                );
+
                 const chatSessionMessage = await this.chatSessionMessageCreate.run(chatSessionMessageCreateDto);
+
                 resolve(res.status(httpStatus.CREATED).send(chatSessionMessage));
             }
             catch (error) {

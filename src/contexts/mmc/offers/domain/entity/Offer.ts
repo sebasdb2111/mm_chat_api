@@ -6,16 +6,11 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany
-}                     from 'typeorm';
-import {IsNumber}     from 'class-validator';
-import {PsychicOffer} from '../../../psychicOffers/domain/entity/PsychicOffer';
-import {CurrencyEnum} from '../../../../shared/domain/CurrencyEnum';
-
-export enum TypeEnum
-{
-    TIME = 'TIME',
-    COIN = 'COIN',
-}
+}                      from 'typeorm';
+import {IsNumber}      from 'class-validator';
+import {PsychicOffer}  from '../../../psychicOffers/domain/entity/PsychicOffer';
+import {CurrencyEnum}  from '../../../../shared/domain/CurrencyEnum';
+import {TypeOfferEnum} from '../enum/TypeOfferEnum';
 
 @Entity()
 @Unique(['id'])
@@ -26,8 +21,8 @@ export class Offer
 
     @Column({
         type   : 'enum',
-        enum   : TypeEnum,
-        default: TypeEnum.COIN
+        enum   : TypeOfferEnum,
+        default: TypeOfferEnum.COIN
     })
     type: string;
 

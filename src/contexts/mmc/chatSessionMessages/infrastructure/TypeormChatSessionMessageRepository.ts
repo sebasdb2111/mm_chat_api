@@ -40,9 +40,14 @@ export default class TypeormChatSessionMessageRepository implements ChatSessionM
 
     async save(chatSessionMessage: ChatSessionMessage): Promise<ChatSessionMessage>
     {
-        const chatSessionMessageRepository               = getRepository(ChatSessionMessage);
-        const saveChatSessionMessage: ChatSessionMessage = await chatSessionMessageRepository.save(chatSessionMessage);
-        return Promise.resolve(saveChatSessionMessage);
+        try {
+            const chatSessionMessageRepository               = getRepository(ChatSessionMessage);
+            const saveChatSessionMessage: ChatSessionMessage = await chatSessionMessageRepository.save(chatSessionMessage);
+            return Promise.resolve(saveChatSessionMessage);
+        }
+        catch (error) {
+            return Promise.reject(error);
+        }
     }
 
     async updateDeleted(id: number, chatSessionMessage: ChatSessionMessage): Promise<void>
