@@ -18,7 +18,7 @@ export class AuthCustomerLoginController implements Controller
         {
             try {
 				const authLoginDto: AuthLoginDto = new AuthLoginDto(
-					req.body.username,
+					req.body.email,
 					req.body.password
 				);
 

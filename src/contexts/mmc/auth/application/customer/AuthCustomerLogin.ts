@@ -17,7 +17,7 @@ export default class AuthCustomerLogin
     async run(authLoginDto: AuthLoginDto): Promise<string>
     {
     	try {
-			const customer: Customer = await this.repository.findOneByUsername(authLoginDto.username);
+			const customer: Customer = await this.repository.findOneByEmail(authLoginDto.email);
 
 			customer.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
 			customer.updateLastLogin();
