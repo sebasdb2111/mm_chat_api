@@ -24,11 +24,11 @@ export default class TypeormCustomerRepository implements CustomerRepository
         }
     }
 
-    async findOneByUsername(username: string): Promise<Customer>
+    async findOneByEmail(email: string): Promise<Customer>
     {
         try {
             const customerRepository = getRepository(Customer);
-            const customer: Customer = await customerRepository.findOneOrFail({where: {username}});
+            const customer: Customer = await customerRepository.findOneOrFail({where: {email}});
             return Promise.resolve(customer);
         }
         catch (error) {

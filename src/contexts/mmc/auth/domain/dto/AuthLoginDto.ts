@@ -1,11 +1,11 @@
 export default class AuthLoginDto
 {
-    readonly username: string;
+    readonly email: string;
     readonly password: string;
 
-    constructor(username: string, password: string)
+    constructor(email: string, password: string)
     {
-        this.username = username;
+        this.email = email;
         this.password = password;
     }
 }

@@ -4,7 +4,7 @@ export default interface CustomerRepository
 {
     findOneOrFail(id: number): Promise<Customer>;
 
-    findOneByUsername(username: string): Promise<Customer>;
+    findOneByEmail(username: string): Promise<Customer>;
 
     save(customer: Customer): Promise<Customer>;
 
