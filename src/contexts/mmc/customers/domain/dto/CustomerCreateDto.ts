@@ -4,7 +4,7 @@ export default class CustomerCreateDto {
 	public email: string;
 	public firstName: string;
 	public lastName: string;
-	public dateBirth: string;
+	public dateBirth: Date;
 
 	constructor(
 		username: string,
@@ -12,7 +12,7 @@ export default class CustomerCreateDto {
 		email: string,
 		firstName: string,
 		lastName: string,
-		dateBirth: string,
+		dateBirth: Date,
 	) {
 		this.username  = username;
 		this.password  = password;
