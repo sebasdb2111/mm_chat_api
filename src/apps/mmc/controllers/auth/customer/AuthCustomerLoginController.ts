@@ -16,20 +16,20 @@ export class AuthCustomerLoginController implements Controller
     {
         return new Promise(async (resolve, reject) =>
         {
-            const authLoginDto: AuthLoginDto = new AuthLoginDto(
-                req.body.username,
-                req.body.password,
-            );
-
             try {
+				const authLoginDto: AuthLoginDto = new AuthLoginDto(
+					req.body.username,
+					req.body.password
+				);
+
                 const token = await this.authCustomerLogin.run(authLoginDto);
                 resolve(res.status(httpStatus.ACCEPTED).send(token));
             }
-            catch (e) {
-                if (e instanceof PasswordIsNotValidException) {
-                    reject(res.status(httpStatus.UNAUTHORIZED).send(e.message));
+            catch (error) {
+                if (error instanceof PasswordIsNotValidException) {
+                    reject(res.status(httpStatus.UNAUTHORIZED).send(error.message));
                 } else {
-                    reject(res.status(httpStatus.INTERNAL_SERVER_ERROR).json(e));
+                    reject(res.status(httpStatus.INTERNAL_SERVER_ERROR).json(error));
                 }
             }
         });

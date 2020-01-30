@@ -20,6 +20,7 @@ export default class CustomerCreate
         customer.firstName       = customerDto.firstName;
         customer.lastName        = customerDto.lastName;
         customer.isActive        = true;
+        customer.dateBirth       = customerDto.dateBirth;
 
         customer.hashPassword();
 

@@ -16,16 +16,21 @@ export default class AuthCustomerLogin
 
     async run(authLoginDto: AuthLoginDto): Promise<string>
     {
-        const customer: Customer = await this.repository.findOneByUsername(authLoginDto.username);
+    	try {
+			const customer: Customer = await this.repository.findOneByUsername(authLoginDto.username);
 
-        customer.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
-        customer.updateLastLogin();
+			customer.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
+			customer.updateLastLogin();
 
-        await this.repository.updateLastLogin(customer.id, customer);
+			await this.repository.updateLastLogin(customer.id, customer);
 
-        const customerToken: string = await this.createJwt(customer);
+			const customerToken: string = await this.createJwt(customer);
 
-        return Promise.resolve(customerToken);
+			return Promise.resolve(customerToken);
+		}
+		catch (error) {
+			return Promise.reject(error);
+		}
     }
 
     async createJwt(customer: Customer): Promise<string>

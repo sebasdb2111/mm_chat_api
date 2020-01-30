@@ -48,6 +48,10 @@ export class Customer
     lastName: string;
 
     @Column()
+    @IsNotEmpty()
+	dateBirth: Date;
+
+    @Column()
     @CreateDateColumn()
     lastLogin: Date;
 
