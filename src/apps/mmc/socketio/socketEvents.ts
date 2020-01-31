@@ -6,6 +6,11 @@ export default io =>
 
     io.on(ChatConstants.CONNECT, socket =>
     {
+        // console.log('connect', socket)
+		socket.on('SEND_MESSAGE', (data) => {
+			io.emit('MESSAGE', data)
+		});
+
         socket.on(ChatConstants.DISCONNECT, () =>
         {
             const userId: any = userSockets[socket.id];

@@ -157,6 +157,14 @@ services:
     arguments: ['@Mmc.customers.CustomerGet']
 
   #*************
+  # Get By Token
+  #*************
+
+  Apps.mmc.controllers.customer.CustomerGetByTokenController:
+    class: ../../controllers/customer/CustomerGetByTokenController
+    arguments: ['@Mmc.customers.CustomerGet']
+
+  #*************
   # Edit
   #*************
   Mmc.customers.CustomerEdit:
@@ -265,6 +273,17 @@ services:
   Apps.mmc.controllers.chatSession.ChatSessionGetController:
     class: ../../controllers/chatSession/ChatSessionGetController
     arguments: ['@Mmc.chatSessions.ChatSessionGet']
+
+  #*************
+  # Get List
+  #*************
+  Mmc.chatSessions.ChatSessionGetList:
+      class: ../../../../contexts/mmc/chatSessions/application/ChatSessionGetList
+      arguments: ['@Mmc.chatSessions.ChatSessionRepository']
+
+  Apps.mmc.controllers.chatSession.ChatSessionGetListController:
+      class: ../../controllers/chatSession/ChatSessionGetListController
+      arguments: ['@Mmc.chatSessions.ChatSessionGetList']
 
   #*************
   # Deactivate
@@ -448,3 +467,14 @@ services:
   Mmc.psychicOffers.PsychicOfferGet:
     class: ../../../../contexts/mmc/psychicOffers/application/PsychicOfferGet
     arguments: ['@Mmc.psychicOffers.PsychicOfferRepository']
+
+  #*************
+  # List
+  #*************
+  Mmc.psychicOffers.PsychicOfferList:
+    class: ../../../../contexts/mmc/psychicOffers/application/PsychicOfferList
+    arguments: ['@Mmc.psychicOffers.PsychicOfferRepository']
+
+  Apps.mmc.controllers.psychicOffer.PsychicOfferListController:
+      class: ../../controllers/psychicOffer/PsychicOfferListController
+      arguments: ['@Mmc.psychicOffers.PsychicOfferList']

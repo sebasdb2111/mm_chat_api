@@ -43,11 +43,11 @@ export const CheckAuthentication = (req: Request, res: Response, next: NextFunct
     }
 
     const payload  = {
-        userId    : jwtPayload.userId,
-        customerId: jwtPayload.customerId,
-        psychicId : jwtPayload.psychicId,
-        username  : jwtPayload.username,
-        entityType: jwtPayload.entityType
+        userId    : jwtPayload.userId ? jwtPayload.userId : null,
+        customerId: jwtPayload.customerId ? jwtPayload.customerId : null,
+        psychicId : jwtPayload.psychicId ? jwtPayload.psychicId : null,
+        username  : jwtPayload.username ? jwtPayload.username : null,
+        entityType: jwtPayload.entityType ? jwtPayload.entityType : null
     };
     const newToken = jwt.sign(payload, config.jwtSecret, {expiresIn: '1h'});
 

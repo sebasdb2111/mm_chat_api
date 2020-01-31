@@ -2,6 +2,7 @@ import {Router}                       from 'express';
 import container                      from '../config/dependency-injection';
 import {CheckAuthentication}          from '../../../contexts/shared/application/CheckAuthentication';
 import {CustomerGetController}        from '../controllers/customer/CustomerGetController';
+import {CustomerGetByTokenController} from '../controllers/customer/CustomerGetByTokenController';
 import {CustomerCreateController}     from '../controllers/customer/CustomerCreateController';
 import {CustomerEditController}       from '../controllers/customer/CustomerEditController';
 import {CustomerDeactivateController} from '../controllers/customer/CustomerDeactivateController';
@@ -9,8 +10,16 @@ import {CustomerDeactivateController} from '../controllers/customer/CustomerDeac
 const router                                                     = Router();
 const customerCreateController: CustomerCreateController         = container.get('Apps.mmc.controllers.customer.CustomerCreateController');
 const customerGetController: CustomerGetController               = container.get('Apps.mmc.controllers.customer.CustomerGetController');
+const customerGetByTokenController: CustomerGetByTokenController = container.get('Apps.mmc.controllers.customer.CustomerGetByTokenController');
 const customerEditController: CustomerEditController             = container.get('Apps.mmc.controllers.customer.CustomerEditController');
 const customerDeactivateController: CustomerDeactivateController = container.get('Apps.mmc.controllers.customer.CustomerDeactivateController');
+
+router
+	.get(
+		'/by-token',
+		CheckAuthentication,
+		customerGetByTokenController.run.bind(customerGetByTokenController)
+	);
 
 router
     .post(

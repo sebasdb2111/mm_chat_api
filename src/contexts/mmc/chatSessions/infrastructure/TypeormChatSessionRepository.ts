@@ -5,6 +5,28 @@ import {EntitiesForRelationEnum}   from '../../shared/domain/EntitiesForRelation
 
 export default class TypeormChatSessionRepository implements ChatSessionRepository
 {
+	async find(ownerId: number): Promise<ChatSession[]>
+	{
+		try {
+			const chatSessionRepository    = getRepository(ChatSession);
+			const chatSession: ChatSession[] = await chatSessionRepository.find(
+				{
+					where: { ownerId },
+					relations: [
+						EntitiesForRelationEnum.CHATSESSIONMESSAGES,
+						EntitiesForRelationEnum.OWNER,
+						EntitiesForRelationEnum.PSYCHIC,
+						EntitiesForRelationEnum.USER
+					]
+				}
+			);
+			return Promise.resolve(chatSession);
+		}
+		catch (error) {
+			return Promise.reject(error)
+		}
+	}
+
     async findOneOrFail(id: number): Promise<ChatSession>
     {
         try {

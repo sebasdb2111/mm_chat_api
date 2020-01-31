@@ -15,11 +15,9 @@ export class CustomerGetController implements Controller
     {
         return new Promise(async (resolve, reject) =>
         {
-            const id: number = Number(req.params.id);
-
             try {
-
-                const customer = await this.customerGet.run(id);
+				const id: number = Number(req.params.id);
+				const customer = await this.customerGet.run(id);
 
                 resolve(res.status(httpStatus.OK).send(customer));
             }
