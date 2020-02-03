@@ -16,7 +16,6 @@ export class ChatSessionConversationGetController implements Controller
         {
             try {
 				const id: number = Number(req.params.id);
-				console.log('CONVERSATIOOON', id);
                 const chatSession = await this.chatSessionMessageList.run(id);
                 resolve(res.status(httpStatus.OK).send(chatSession));
             }

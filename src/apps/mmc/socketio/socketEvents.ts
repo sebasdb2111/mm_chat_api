@@ -6,10 +6,11 @@ export default io =>
 
     io.on(ChatConstants.CONNECT, socket =>
     {
+		console.log(socket.id)
         // console.log('connect', socket)
-		socket.on('SEND_MESSAGE', (data) => {
-			io.emit('MESSAGE', data)
-		});
+		// socket.on('SEND_MESSAGE', (data) => {
+			// io.emit('MESSAGE', data)
+		// });
 
         socket.on(ChatConstants.DISCONNECT, () =>
         {
@@ -37,6 +38,7 @@ export default io =>
 
         socket.on('enter-conversation', conversation =>
         {
+
             socket.join(conversation);
         });
 
@@ -45,9 +47,11 @@ export default io =>
             socket.leave(conversation);
         });
 
-        socket.on('send-message', message =>
+        socket.on('customer-send-message', message =>
         {
-            socket.broadcast.to(message.conversationId).emit('new-message', message);
+			console.log('AAAA', message)
+			io.to(`${socket.id}`).emit(message);
+            // socket.emit('new-message', message);
         });
     });
 };
