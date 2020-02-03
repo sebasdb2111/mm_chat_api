@@ -4,6 +4,7 @@ import {CheckAuthentication}                from '../../../contexts/shared/appli
 import {ChatSessionMessageGetController}    from '../controllers/chatSessionMessage/ChatSessionMessageGetController';
 import {ChatSessionMessageCreateController} from '../controllers/chatSessionMessage/ChatSessionMessageCreateController';
 import {ChatSessionMessageDeleteController} from '../controllers/chatSessionMessage/ChatSessionMessageDeleteController';
+import {ChatSessionConversationGetController} from '../controllers/chatSessionMessage/ChatSessionConversationGetController';
 
 const router                                                                 = Router();
 const chatSessionMessageCreateController: ChatSessionMessageCreateController = container.get(
@@ -11,6 +12,9 @@ const chatSessionMessageCreateController: ChatSessionMessageCreateController = c
 );
 const chatSessionMessageGetController: ChatSessionMessageGetController       = container.get(
     'Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageGetController'
+);
+const chatSessionConversationGetController: ChatSessionConversationGetController = container.get(
+    'Apps.mmc.controllers.chatSessionMessages.ChatSessionConversationGetController'
 );
 const chatSessionMessageDeleteController: ChatSessionMessageDeleteController = container.get(
     'Apps.mmc.controllers.chatSessionMessage.ChatSessionMessageDeleteController'
@@ -36,5 +40,10 @@ router
         CheckAuthentication,
         chatSessionMessageDeleteController.run.bind(chatSessionMessageDeleteController)
     );
-
+router
+	.get(
+		'/by-chat-session/:id',
+		CheckAuthentication,
+		chatSessionConversationGetController.run.bind(chatSessionConversationGetController)
+	);
 export default router;
