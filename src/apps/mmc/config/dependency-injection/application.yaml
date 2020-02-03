@@ -267,7 +267,7 @@ services:
       class: ../../../../contexts/mmc/chatSessions/application/ChatSessionGet
       arguments: [
         '@Mmc.chatSessions.ChatSessionRepository',
-        '@Mmc.chatSessionMessages.ChatSessionMessageList'
+        '@Mmc.chatSessionMessages.ChatSessionConversationGet'
       ]
 
   Apps.mmc.controllers.chatSession.ChatSessionGetController:
@@ -284,6 +284,7 @@ services:
   Apps.mmc.controllers.chatSession.ChatSessionGetListController:
       class: ../../controllers/chatSession/ChatSessionGetListController
       arguments: ['@Mmc.chatSessions.ChatSessionGetList']
+
 
   #*************
   # Deactivate
@@ -334,11 +335,15 @@ services:
     arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageGet']
 
   #*************
-  # List
+  # Get Conversation
   #*************
-  Mmc.chatSessionMessages.ChatSessionMessageList:
-      class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionMessageList
+  Mmc.chatSessionMessages.ChatSessionConversationGet:
+      class: ../../../../contexts/mmc/chatSessionMessages/application/ChatSessionConversationGet
       arguments: ['@Mmc.chatSessionMessages.ChatSessionMessageRepository']
+
+  Apps.mmc.controllers.chatSessionMessages.ChatSessionConversationGetController:
+      class: ../../controllers/chatSessionMessage/ChatSessionConversationGetController
+      arguments: ['@Mmc.chatSessionMessages.ChatSessionConversationGet']
 
   #*************
   # Delete

@@ -1,7 +1,7 @@
 import {ChatSession}             from '../domain/entity/ChatSession';
 import ChatSessionRepository     from '../domain/ChatSessionRepository';
 import ChatSessionNotExistGuard  from '../../shared/application/ChatSessionNotExistGuard';
-import ChatSessionMessageList    from '../../chatSessionMessages/application/ChatSessionMessageList';
+import ChatSessionConversationGet    from '../../chatSessionMessages/application/ChatSessionConversationGet';
 import {ChatSessionMessage}      from '../../chatSessionMessages/domain/entity/ChatSessionMessage';
 import {IChatSessionCoversation} from '../domain/interfaces/IChatSessionCoversation';
 import {IMessage}                from '../../shared/domain/interfaces/IMessage';
@@ -9,9 +9,9 @@ import {IMessage}                from '../../shared/domain/interfaces/IMessage';
 export default class ChatSessionConversationGet
 {
     private repository: ChatSessionRepository;
-    private chatSessionMessageList: ChatSessionMessageList;
+    private chatSessionMessageList: ChatSessionConversationGet;
 
-    constructor(repository: ChatSessionRepository, chatSessionMessageList: ChatSessionMessageList)
+    constructor(repository: ChatSessionRepository, chatSessionMessageList: ChatSessionConversationGet)
     {
         this.repository             = repository;
         this.chatSessionMessageList = chatSessionMessageList;

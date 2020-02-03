@@ -1,12 +1,12 @@
 import {Request, Response} from 'express';
 import * as httpStatus     from 'http-status';
 import Controller          from '../Controller';
-import ChatSessionGet      from '../../../../contexts/mmc/chatSessions/application/ChatSessionGet';
+import ChatSessionConversationGet from '../../../../contexts/mmc/chatSessionMessages/application/ChatSessionConversationGet';
 
 
-export class ChatSessionGetController implements Controller
+export class ChatSessionConversationGetController implements Controller
 {
-    constructor(private chatSessionGet: ChatSessionGet)
+    constructor(private chatSessionMessageList: ChatSessionConversationGet)
     {
     }
 
@@ -16,16 +16,12 @@ export class ChatSessionGetController implements Controller
         {
             try {
 				const id: number = Number(req.params.id);
-                const chatSession = await this.chatSessionGet.run(id);
-                resolve(res.status(httpStatus.CREATED).send(chatSession));
+				console.log('CONVERSATIOOON', id);
+                const chatSession = await this.chatSessionMessageList.run(id);
+                resolve(res.status(httpStatus.OK).send(chatSession));
             }
             catch (error) {
                 let httpStatusError = httpStatus.INTERNAL_SERVER_ERROR;
-
-                // if (error instanceof UserNotExistsException) {
-                //     httpStatusError = httpStatus.BAD_REQUEST;
-                // }
-
                 reject(res.status(httpStatusError).send(error.message));
             }
         });

@@ -1,6 +1,6 @@
 import {ChatSession}             from '../domain/entity/ChatSession';
 import ChatSessionRepository     from '../domain/ChatSessionRepository';
-// import ChatSessionMessageList    from '../../chatSessionMessages/application/ChatSessionMessageList';
+// import ChatSessionConversationGet    from '../../chatSessionMessages/application/ChatSessionConversationGet';
 // import {ChatSessionMessage}      from '../../chatSessionMessages/domain/entity/ChatSessionMessage';
 // import {IChatSessionCoversation} from '../domain/interfaces/IChatSessionCoversation';
 // import {IMessage}                from '../../shared/domain/interfaces/IMessage';
