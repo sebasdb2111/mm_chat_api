@@ -18,6 +18,25 @@ export default class ChatSessionGetList {
 				chatSessionListDto.ownerId, chatSessionListDto.psychicId
 			);
 
+			chatSessionList.forEach(chatSession =>
+			{
+				delete chatSession.psychic.password;
+				delete chatSession.psychic.email;
+				delete chatSession.psychic.updatedAt;
+
+				if (null !== chatSession.owner) {
+					delete chatSession.owner.password;
+					delete chatSession.owner.email;
+					delete chatSession.owner.updatedAt;
+				}
+
+				if (null !== chatSession.user) {
+					delete chatSession.user.password;
+					delete chatSession.user.email;
+					delete chatSession.user.updatedAt;
+				}
+			});
+
 			return Promise.resolve(chatSessionList);
 		}
 		catch (error) {
