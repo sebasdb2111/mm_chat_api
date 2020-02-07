@@ -216,6 +216,14 @@ services:
     arguments: ['@Mmc.psychics.PsychicGet']
 
   #*************
+  # Get By Token
+  #*************
+
+  Apps.mmc.controllers.psychic.PsychicGetByTokenController:
+    class: ../../controllers/psychic/PsychicGetByTokenController
+    arguments: ['@Mmc.psychics.PsychicGet']
+
+  #*************
   # Edit
   #*************
   Mmc.psychics.PsychicEdit:

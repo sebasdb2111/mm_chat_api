@@ -4,7 +4,7 @@ export default interface PsychicRepository
 {
     findOneOrFail(id: number): Promise<Psychic>;
 
-    findOneByUsername(username: string): Promise<Psychic>;
+    findOneByEmail(username: string): Promise<Psychic>;
 
     save(psychic: Psychic): Promise<Psychic>;
 

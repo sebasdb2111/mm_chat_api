@@ -7,6 +7,8 @@ import {User}                from '../../users/domain/entity/User';
 import UserGet               from '../../users/application/UserGet';
 import CustomerGet           from '../../customers/application/CustomerGet';
 import PsychicGet            from '../../psychics/application/PsychicGet';
+import ChatSessionNotExistException from '../../shared/domain/exceptions/ChatSessionNotExistsException';
+import ChatSessionAlreadyExistsException from '../domain/exceptions/ChatSessionAlreadyExistsException';
 
 export default class ChatSessionCreate
 {
@@ -35,6 +37,8 @@ export default class ChatSessionCreate
             const psychic: Psychic   = await this.psychicGet.run(chatSessionDto.psychicId);
             const user: User         = chatSessionDto.userId ? await this.userGet.run(chatSessionDto.userId) : null;
 
+            await this.guard(customer.id, psychic.id);
+
             const chatSession: ChatSession = new ChatSession();
             chatSession.isActive           = true;
             chatSession.owner              = customer;
@@ -47,6 +51,15 @@ export default class ChatSessionCreate
         }
         catch (error) {
             return Promise.reject(error)
+        }
+    }
+
+    async guard(customer: number, psychic: number): Promise<void>
+    {
+        const chatSession: ChatSession = await this.repository.findByCustomerAndPsychic(customer, psychic);
+        console.log('XXXXXXXXXXXXX', chatSession)
+        if (chatSession) {
+            throw new ChatSessionAlreadyExistsException(psychic);
         }
     }
 }

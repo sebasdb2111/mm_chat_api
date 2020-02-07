@@ -8,5 +8,7 @@ export default interface ChatSessionRepository
 
     save(chatSession: ChatSession): Promise<ChatSession>;
 
+	findByCustomerAndPsychic(ownerId: number, psychic: number): Promise<ChatSession>;
+
     updateIsActive(id: number, chatSession: ChatSession): Promise<void>;
 }

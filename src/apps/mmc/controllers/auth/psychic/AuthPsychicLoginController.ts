@@ -17,7 +17,7 @@ export class AuthPsychicLoginController implements Controller
         return new Promise(async (resolve, reject) =>
         {
             const authLoginDto: AuthLoginDto = new AuthLoginDto(
-                req.body.username,
+                req.body.email,
                 req.body.password,
             );
 

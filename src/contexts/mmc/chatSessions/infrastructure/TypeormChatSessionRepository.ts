@@ -2,6 +2,7 @@ import {getRepository}             from 'typeorm';
 import {ChatSession}               from '../domain/entity/ChatSession';
 import ChatSessionRepository       from '../domain/ChatSessionRepository';
 import {EntitiesForRelationEnum}   from '../../shared/domain/EntitiesForRelationEnum';
+import {Credit} from '../../credits/domain/entity/Credit';
 
 export default class TypeormChatSessionRepository implements ChatSessionRepository
 {
@@ -42,6 +43,23 @@ export default class TypeormChatSessionRepository implements ChatSessionReposito
                     ]
                 }
             );
+            return Promise.resolve(chatSession);
+        }
+        catch (error) {
+            return Promise.reject(error)
+        }
+    }
+
+    async findByCustomerAndPsychic(ownerId: number, psychicId: number): Promise<ChatSession>
+    {
+        try {
+            const chatSessionRepository = getRepository(ChatSession);
+			const chatSession: ChatSession		= await chatSessionRepository
+				.createQueryBuilder('chatSession')
+				.where('ownerId = :owner', {owner: ownerId})
+				.andWhere('psychicId = :psychic', {psychic: psychicId})
+				.getOne();
+
             return Promise.resolve(chatSession);
         }
         catch (error) {

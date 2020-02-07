@@ -16,7 +16,7 @@ export default class AuthPsychicLogin
 
     async run(authLoginDto: AuthLoginDto): Promise<string>
     {
-        const psychic: Psychic = await this.repository.findOneByUsername(authLoginDto.username);
+        const psychic: Psychic = await this.repository.findOneByEmail(authLoginDto.email);
 
         psychic.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
         psychic.updateLastLogin();

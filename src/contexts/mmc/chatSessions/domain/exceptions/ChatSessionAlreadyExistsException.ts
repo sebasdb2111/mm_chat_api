@@ -1,7 +1,7 @@
-export default class ChatSessionNotExistsException extends Error
+export default class ChatSessionAlreadyExistsException extends Error
 {
-    constructor(chatSessionId: number)
+    constructor(psychicId: number)
     {
-        super(`The chat session with id: ${chatSessionId} not exists`);
+        super(`There is already a chat with the psychic ${psychicId}`);
     }
 }

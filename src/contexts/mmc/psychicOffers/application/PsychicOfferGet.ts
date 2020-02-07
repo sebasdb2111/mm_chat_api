@@ -10,10 +10,10 @@ export default class PsychicOfferGet
         this.repository = repository;
     }
 
-    async run(psychicOfferId: number): Promise<PsychicOffer>
+    async run(ownerId: number, psychicId: number): Promise<PsychicOffer>
     {
         try {
-            const psychicOffer: PsychicOffer = await this.repository.findOneOrFail(psychicOfferId);
+            const psychicOffer: PsychicOffer = await this.repository.findOneByOwnerAndPsychic(ownerId, psychicId);
 
             return Promise.resolve(psychicOffer);
         }

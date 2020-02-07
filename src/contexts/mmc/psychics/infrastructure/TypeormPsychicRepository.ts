@@ -11,10 +11,10 @@ export default class TypeormPsychicRepository implements PsychicRepository
         return Promise.resolve(psychic);
     }
 
-    async findOneByUsername(username: string): Promise<Psychic>
+    async findOneByEmail(email: string): Promise<Psychic>
     {
         const psychicRepository = getRepository(Psychic);
-        const psychic: Psychic = await psychicRepository.findOneOrFail({where: {username}});
+        const psychic: Psychic = await psychicRepository.findOneOrFail({where: {email}});
         return Promise.resolve(psychic);
     }
 

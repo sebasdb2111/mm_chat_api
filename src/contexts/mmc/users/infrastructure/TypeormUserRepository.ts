@@ -16,11 +16,11 @@ export default class TypeormUserRepository implements UserRepository
         }
     }
 
-    async findOneByUsername(username: string): Promise<User>
+    async findOneByEmail(email: string): Promise<User>
     {
         try {
             const userRepository = getRepository(User);
-            const user: User     = await userRepository.findOneOrFail({where: {username}});
+            const user: User     = await userRepository.findOneOrFail({where: {email}});
             return Promise.resolve(user);
         }
         catch (error) {

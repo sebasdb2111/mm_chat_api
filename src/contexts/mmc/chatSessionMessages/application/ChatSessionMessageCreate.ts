@@ -49,8 +49,7 @@ export default class ChatSessionMessageCreate
     {
         try {
             const chatSession: ChatSession   = await this.chatSessionGet.run(chatSessionMessageDto.chatSessionId);
-            const psychicOffer: PsychicOffer = await this.psychicOfferGet.run(chatSession.psychic.id);
-
+            const psychicOffer: PsychicOffer = await this.psychicOfferGet.run(chatSession.owner.id, chatSession.psychic.id);
             const customer: Customer = null === chatSessionMessageDto.customerId || undefined === chatSessionMessageDto.customerId
                 ? null
                 : await this.customerGet.run(chatSessionMessageDto.customerId);
@@ -58,14 +57,15 @@ export default class ChatSessionMessageCreate
                 ? null
                 : await this.userGet.run(chatSessionMessageDto.userId);
 
-            const availableCredits: IFindAndSumCreditsByCustomerAndPsychic = await this.creditListByCustomerIdAndPsychicId.run(
-                chatSessionMessageDto.customerId,
-                chatSession.psychic.id
-            );
+            if (null !== customer) {
+				const availableCredits: IFindAndSumCreditsByCustomerAndPsychic = await this.creditListByCustomerIdAndPsychicId.run(
+					chatSessionMessageDto.customerId,
+					chatSession.psychic.id
+				);
 
-            this.guard(psychicOffer, availableCredits);
-
-            await this.creditDecrementCoinsPerMessage.run(customer.id, chatSession.psychic.id);
+				this.guard(psychicOffer, availableCredits);
+				await this.creditDecrementCoinsPerMessage.run(customer.id, chatSession.psychic.id);
+            }
 
             const chatSessionMessage: ChatSessionMessage = new ChatSessionMessage();
             chatSessionMessage.message                   = chatSessionMessageDto.message;

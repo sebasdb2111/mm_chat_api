@@ -16,7 +16,7 @@ export default class AuthUserLogin
 
     async run(authLoginDto: AuthLoginDto): Promise<string>
     {
-        const user: User = await this.repository.findOneByUsername(authLoginDto.username);
+        const user: User = await this.repository.findOneByEmail(authLoginDto.email);
 
         user.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
         user.updateLastLogin();

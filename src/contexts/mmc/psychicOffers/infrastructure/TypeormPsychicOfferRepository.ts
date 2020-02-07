@@ -26,6 +26,27 @@ export default class TypeormPsychicOfferRepository implements PsychicOfferReposi
         }
     }
 
+	async findOneByOwnerAndPsychic(ownerId: number, psychicId: number): Promise<PsychicOffer>
+	{
+		try {
+			const psychicOfferRepository     = getRepository(PsychicOffer);
+			const psychicOffer: PsychicOffer = await psychicOfferRepository.findOneOrFail(
+				{
+					where: { ownerId, psychicId },
+					relations: [
+						EntitiesForRelationEnum.OFFER,
+						EntitiesForRelationEnum.PSYCHIC,
+					]
+				}
+			);
+
+			return Promise.resolve(psychicOffer);
+		}
+		catch (error) {
+			return Promise.reject(error);
+		}
+	}
+
 	async find(): Promise<PsychicOffer[]>
 	{
 		try {
