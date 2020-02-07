@@ -15,8 +15,13 @@ export class ChatSessionGetListController implements Controller
         return new Promise(async (resolve, reject) =>
         {
             try {
-				const ownerId: number = res.locals.jwtPayload.customerId;
-                const chatSessionList = await this.chatSessionGetList.run(ownerId);
+				//TODO: crear dto especifico para este controlador
+                const chatSessionListDto = {
+                    psychicId: res.locals.jwtPayload.psychicId,
+					ownerId: res.locals.jwtPayload.customerId
+                };
+
+                const chatSessionList = await this.chatSessionGetList.run(chatSessionListDto);
 
                 resolve(res.status(httpStatus.OK).send(chatSessionList));
             }

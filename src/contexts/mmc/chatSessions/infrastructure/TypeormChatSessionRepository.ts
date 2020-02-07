@@ -28,6 +28,35 @@ export default class TypeormChatSessionRepository implements ChatSessionReposito
 		}
 	}
 
+    async findByOwnerOrPsychic(ownerId: any, psychicId: any): Promise<ChatSession[]>
+	{
+		try {
+			const chatSessionRepository    = getRepository(ChatSession);
+			let query: any =  chatSessionRepository
+				.createQueryBuilder('chatSession')
+				// .leftJoinAndSelect(`chatSession.${EntitiesForRelationEnum.CHATSESSIONMESSAGES}`, 'chatSessionMessages')
+				.leftJoinAndSelect(`chatSession.${EntitiesForRelationEnum.OWNER}`, 'owner')
+				.leftJoinAndSelect(`chatSession.${EntitiesForRelationEnum.PSYCHIC}`, 'psychic')
+				.leftJoinAndSelect(`chatSession.${EntitiesForRelationEnum.USER}`, 'user');
+
+				if(ownerId && !psychicId) {
+					query = query.where('chatSession.ownerId = :owner', {owner: ownerId});
+				}
+
+				if(psychicId && !ownerId) {
+					console.log('psychic', psychicId)
+					query = query.where('chatSession.psychicId = :psychic', {psychic: psychicId});
+				}
+
+				const chatSession: ChatSession[] = await query.getMany();
+
+			return Promise.resolve(chatSession);
+		}
+		catch (error) {
+			return Promise.reject(error)
+		}
+	}
+
     async findOneOrFail(id: number): Promise<ChatSession>
     {
         try {
