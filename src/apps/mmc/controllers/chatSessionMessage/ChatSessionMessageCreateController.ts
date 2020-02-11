@@ -18,6 +18,7 @@ export class ChatSessionMessageCreateController implements Controller
                 const chatSessionMessageCreateDto: ChatSessionMessageCreateDto = new ChatSessionMessageCreateDto(
                     req.body.chatSessionId,
                     req.body.message,
+                    req.body.isImage,
                     res.locals.jwtPayload.customerId,
                     res.locals.jwtPayload.psychicId,
                     res.locals.jwtPayload.userId

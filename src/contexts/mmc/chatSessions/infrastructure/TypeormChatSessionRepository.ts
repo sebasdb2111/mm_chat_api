@@ -44,7 +44,6 @@ export default class TypeormChatSessionRepository implements ChatSessionReposito
 				}
 
 				if(psychicId && !ownerId) {
-					console.log('psychic', psychicId)
 					query = query.where('chatSession.psychicId = :psychic', {psychic: psychicId});
 				}
 

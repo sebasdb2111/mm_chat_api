@@ -57,7 +57,6 @@ export default class ChatSessionCreate
     async guard(customer: number, psychic: number): Promise<void>
     {
         const chatSession: ChatSession = await this.repository.findByCustomerAndPsychic(customer, psychic);
-        console.log('XXXXXXXXXXXXX', chatSession)
         if (chatSession) {
             throw new ChatSessionAlreadyExistsException(psychic);
         }

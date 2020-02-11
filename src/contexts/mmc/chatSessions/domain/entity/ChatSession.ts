@@ -4,7 +4,9 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn, OneToMany, ManyToOne
+    UpdateDateColumn,
+    OneToMany,
+    ManyToOne
 }                              from 'typeorm';
 import {IsBoolean, IsOptional} from 'class-validator';
 import {ChatSessionMessage}    from '../../../chatSessionMessages/domain/entity/ChatSessionMessage';
