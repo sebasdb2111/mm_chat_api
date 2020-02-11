@@ -16,16 +16,21 @@ export default class AuthPsychicLogin
 
     async run(authLoginDto: AuthLoginDto): Promise<string>
     {
-        const psychic: Psychic = await this.repository.findOneByEmail(authLoginDto.email);
+        try {
+			const psychic: Psychic = await this.repository.findOneByEmail(authLoginDto.email);
 
-        psychic.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
-        psychic.updateLastLogin();
+			psychic.checkIfUnencryptedPasswordIsValid(authLoginDto.password);
+			psychic.updateLastLogin();
 
-        await this.repository.updateLastLogin(psychic.id, psychic);
+			await this.repository.updateLastLogin(psychic.id, psychic);
 
-        const psychicToken: string = await this.createJwt(psychic);
+			const psychicToken: string = await this.createJwt(psychic);
 
-        return Promise.resolve(psychicToken);
+			return Promise.resolve(psychicToken);
+		}
+		catch (error) {
+			return Promise.reject(error);
+		}
     }
 
     async createJwt(psychic: Psychic): Promise<string>

@@ -21,8 +21,11 @@ export class ChatSessionMessage
     id: number;
 
     @Column()
-    @IsBoolean()
     message: string;
+
+    @Column()
+    @IsBoolean()
+    isImage: boolean;
 
     @Column()
     @IsBoolean()

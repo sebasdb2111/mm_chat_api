@@ -69,6 +69,7 @@ export default class ChatSessionMessageCreate
 
             const chatSessionMessage: ChatSessionMessage = new ChatSessionMessage();
             chatSessionMessage.message                   = chatSessionMessageDto.message;
+            chatSessionMessage.isImage                   = chatSessionMessageDto.isImage;
             chatSessionMessage.deleted                   = false;
             chatSessionMessage.chatSession               = chatSession;
             chatSessionMessage.customer                  = customer;
