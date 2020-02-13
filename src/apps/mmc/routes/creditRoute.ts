@@ -1,18 +1,16 @@
-// import {Router}                 from 'express';
-// import container                from '../config/dependency-injection';
-// import {CheckAuthentication}    from '../../../contexts/shared/application/CheckAuthentication';
-// import {CreditCreateController} from '../controllers/credit/CreditCreateController';
-// import {CheckRole}              from '../../../contexts/shared/application/CheckRole';
-//
-// const router                                         = Router();
-// const creditCreateController: CreditCreateController = container.get('Apps.mmc.controllers.credit.CreditCreateController');
-//
-// router
-//     .post(
-//         '/',
-//         CheckAuthentication,
-//         CheckRole['ADMIN'],
-//         creditCreateController.run.bind(creditCreateController)
-//     );
-//
-// export default router;
+import {Router}                 from 'express';
+import container                from '../config/dependency-injection';
+import {CheckAuthentication}    from '../../../contexts/shared/application/CheckAuthentication';
+import {CreditSumGetController} from '../controllers/credit/CreditSumGetController';
+
+const router                                         = Router();
+const creditCreateController: CreditSumGetController = container.get('Apps.mmc.controllers.credit.CreditSumGetController');
+
+router
+    .get(
+        '/sum-by-customer-and-psychic',
+        CheckAuthentication,
+        creditCreateController.run.bind(creditCreateController)
+    );
+
+export default router;
