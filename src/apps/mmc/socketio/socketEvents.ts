@@ -37,16 +37,16 @@ export default io => {
 
 		socket.on('customers-online-ping', () => {
 			socket.emit('customers_online_list', customerSockets);
-			setInterval(() => {
-				socket.emit('customers_online_list', customerSockets);
-			}, 5000);
+			// setInterval(() => {
+			// 	socket.emit('customers_online_list', customerSockets);
+			// }, 5000);
 		});
 
 		socket.on('psychics-online-ping', () => {
 			socket.emit('psychics_online_list', psychicSockets);
-			setInterval(() => {
-				socket.emit('psychics_online_list', psychicSockets);
-			}, 5000);
+			// setInterval(() => {
+			// 	socket.emit('psychics_online_list', psychicSockets);
+			// }, 5000);
 		});
 
 		socket.on('customer_send_message', customerMessage => {
