@@ -1,4 +1,4 @@
 export enum CostPerMensajeEnum
 {
-    COIN = 4
+    COIN = 1
 }

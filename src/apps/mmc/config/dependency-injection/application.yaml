@@ -408,6 +408,13 @@ services:
       class: ../../../../contexts/mmc/credits/application/CreditDecrementCoinsPerMessage
       arguments: ['@Mmc.credits.CreditRepository']
 
+  #*************
+  # Get Sumatory
+  #*************
+  Apps.mmc.controllers.credit.CreditSumGetController:
+    class: ../../controllers/credit/CreditSumGetController
+    arguments: ['@Mmc.credits.CreditListByCustomerIdAndPsychicId']
+
   ##########################################################################################
   ########## TRANSACTION
   ##########################################################################################
