@@ -1,5 +1,5 @@
 {
-  "name": "mediamotive_chat_ts",
+  "name": "mm_chat_ts",
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "scripts": {
